@@ -1,6 +1,10 @@
 package de.jeha.s3srv;
 
 import de.jeha.s3srv.config.S3SrvConfiguration;
+import de.jeha.s3srv.operations.buckets.CreateBucket;
+import de.jeha.s3srv.operations.service.ListBuckets;
+import de.jeha.s3srv.storage.StorageBackend;
+import de.jeha.s3srv.storage.backends.InMemoryStorageBackend;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -32,6 +36,11 @@ public class S3SrvService extends Application<S3SrvConfiguration> {
 
     @Override
     public void run(S3SrvConfiguration configuration, Environment environment) {
+        StorageBackend storageBackend = new InMemoryStorageBackend();
+
+        environment.jersey().register(new CreateBucket(storageBackend));
+        environment.jersey().register(new ListBuckets());
+
         environment.jersey().disable(ServerProperties.WADL_FEATURE_DISABLE);
     }
 
