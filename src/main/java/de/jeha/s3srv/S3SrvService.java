@@ -39,7 +39,7 @@ public class S3SrvService extends Application<S3SrvConfiguration> {
         StorageBackend storageBackend = new InMemoryStorageBackend();
 
         environment.jersey().register(new CreateBucket(storageBackend));
-        environment.jersey().register(new ListBuckets());
+        environment.jersey().register(new ListBuckets(storageBackend));
 
         environment.jersey().disable(ServerProperties.WADL_FEATURE_DISABLE);
     }

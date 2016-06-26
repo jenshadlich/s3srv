@@ -1,6 +1,7 @@
 package de.jeha.s3srv.operations.buckets;
 
 import com.codahale.metrics.annotation.Timed;
+import de.jeha.s3srv.operations.AbstractOperation;
 import de.jeha.s3srv.storage.StorageBackend;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,13 +20,12 @@ import javax.ws.rs.core.Response;
  * @author jenshadlich@googlemail.com
  */
 @Path("/")
-public class CreateBucket {
+public class CreateBucket extends AbstractOperation {
 
     private static final Logger LOG = LoggerFactory.getLogger(CreateBucket.class);
-    private final StorageBackend storageBackend;
 
     public CreateBucket(StorageBackend storageBackend) {
-        this.storageBackend = storageBackend;
+        super(storageBackend);
     }
 
     @PUT
@@ -37,7 +37,7 @@ public class CreateBucket {
                                  @PathParam("bucket") String bucket) {
         LOG.info("createBucket {}", bucket);
 
-        storageBackend.createBucket(bucket);
+        getStorageBackend().createBucket(bucket);
 
         response.addHeader("Location", "/" + bucket);
 
