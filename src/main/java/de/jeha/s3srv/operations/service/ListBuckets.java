@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -26,11 +25,26 @@ public class ListBuckets extends AbstractOperation {
 
     @GET
     @Path("/")
-    @Produces(MediaType.APPLICATION_XML)
     @Timed
     public Response listBuckets() {
+
+        String responseBody = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+                "<ListAllMyBucketsResult xmlns=\"http://s3.amazonaws.com/doc/2006-03-01\">\n" +
+                "  <Owner>\n" +
+                "    <ID>foo</ID>\n" +
+                "    <DisplayName>bar</DisplayName>\n" +
+                "  </Owner>\n" +
+                "  <Buckets>\n" +
+                "    <Bucket>\n" +
+                "      <Name>quotes</Name>\n" +
+                "      <CreationDate>2006-02-03T16:45:09.000Z</CreationDate>\n" +
+                "    </Bucket>\n" +
+                "  </Buckets>\n" +
+                "</ListAllMyBucketsResult>";
+
         LOG.info("listBuckets {}");
-        throw new UnsupportedOperationException("Not implemented yet!");
+
+        return Response.ok(responseBody, MediaType.APPLICATION_XML_TYPE).build();
     }
 
 }
