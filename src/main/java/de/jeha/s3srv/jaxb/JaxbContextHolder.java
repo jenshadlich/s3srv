@@ -1,5 +1,6 @@
 package de.jeha.s3srv.jaxb;
 
+import de.jeha.s3srv.api.ErrorResponse;
 import de.jeha.s3srv.api.ListAllMyBucketsResponse;
 
 import javax.xml.bind.JAXBContext;
@@ -14,7 +15,10 @@ class JaxbContextHolder {
 
     static {
         try {
-            JAXB_CONTEXT = JAXBContext.newInstance(ListAllMyBucketsResponse.class);
+            JAXB_CONTEXT = JAXBContext.newInstance(
+                    ErrorResponse.class,
+                    ListAllMyBucketsResponse.class
+            );
         } catch (JAXBException e) {
             throw new RuntimeException("Unable to initialize JAXB Context", e);
         }
