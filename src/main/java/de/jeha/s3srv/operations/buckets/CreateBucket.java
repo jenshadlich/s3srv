@@ -11,10 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
@@ -31,7 +29,6 @@ public class CreateBucket extends AbstractOperation {
 
     @PUT
     @Path("/{bucket}/")
-    @Produces(MediaType.APPLICATION_XML)
     @Timed
     public Response createBucket(@Context HttpHeaders headers,
                                  @Context HttpServletResponse response,
@@ -39,7 +36,7 @@ public class CreateBucket extends AbstractOperation {
         LOG.info("createBucket {}", bucket);
 
         if (getStorageBackend().bucketExists(bucket)) {
-            return buildErrorResponse(ErrorCodes.BUCKET_ALREADY_EXISTS, bucket, null);
+            return createErrorResponse(ErrorCodes.BUCKET_ALREADY_EXISTS, bucket, null);
         } else {
             getStorageBackend().createBucket(bucket);
             response.addHeader("Location", "/" + bucket);
