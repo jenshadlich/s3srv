@@ -39,7 +39,8 @@ public class ListBuckets extends AbstractOperation {
                 .map(bucket -> new ListAllMyBucketsResponse.Entry(bucket.getName(), bucket.getCreationDate()))
                 .collect(Collectors.toList());
 
-        ListAllMyBucketsResponse response = new ListAllMyBucketsResponse(new ListAllMyBucketsResponse.Owner("foo", "bar"), buckets);
+        ListAllMyBucketsResponse response =
+                new ListAllMyBucketsResponse(new ListAllMyBucketsResponse.Owner("foo", "bar"), buckets);
 
         try {
             return Response.ok(JaxbMarshaller.marshall(response), MediaType.APPLICATION_XML_TYPE).build();

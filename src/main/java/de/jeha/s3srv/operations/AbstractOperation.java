@@ -4,6 +4,8 @@ import de.jeha.s3srv.api.ErrorCodes;
 import de.jeha.s3srv.api.ErrorResponse;
 import de.jeha.s3srv.jaxb.JaxbMarshaller;
 import de.jeha.s3srv.storage.StorageBackend;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -14,6 +16,8 @@ import java.io.IOException;
  * @author jenshadlich@googlemail.com
  */
 public abstract class AbstractOperation {
+
+    private static final Logger LOG = LoggerFactory.getLogger(AbstractOperation.class);
 
     private final StorageBackend storageBackend;
 
@@ -35,7 +39,8 @@ public abstract class AbstractOperation {
                     .type(MediaType.APPLICATION_XML_TYPE)
                     .build();
         } catch (IOException | JAXBException e) {
-            throw new RuntimeException(e);
+            LOG.error("Unable to create xml error response body", e);
+            return Response.serverError().build();
         }
     }
 
