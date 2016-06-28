@@ -32,6 +32,11 @@ public class ListAllMyBucketsResponse {
         Collections.addAll(buckets, entries);
     }
 
+    public ListAllMyBucketsResponse(Owner owner, List<Entry> entries) {
+        this.owner = owner;
+        buckets.addAll(entries);
+    }
+
     public static class Owner {
 
         @XmlElement(name = "ID")
