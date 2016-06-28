@@ -1,6 +1,8 @@
 package de.jeha.s3srv.operations.service;
 
 import com.codahale.metrics.annotation.Timed;
+import de.jeha.s3srv.api.ListAllMyBucketsResponse;
+import de.jeha.s3srv.jaxb.JaxbMarshaller;
 import de.jeha.s3srv.operations.AbstractOperation;
 import de.jeha.s3srv.storage.StorageBackend;
 import org.slf4j.Logger;
@@ -10,6 +12,8 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author jenshadlich@googlemail.com
@@ -27,24 +31,22 @@ public class ListBuckets extends AbstractOperation {
     @Path("/")
     @Timed
     public Response listBuckets() {
-
-        String responseBody = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-                "<ListAllMyBucketsResult xmlns=\"http://s3.amazonaws.com/doc/2006-03-01\">\n" +
-                "  <Owner>\n" +
-                "    <ID>foo</ID>\n" +
-                "    <DisplayName>bar</DisplayName>\n" +
-                "  </Owner>\n" +
-                "  <Buckets>\n" +
-                "    <Bucket>\n" +
-                "      <Name>quotes</Name>\n" +
-                "      <CreationDate>2006-02-03T16:45:09.000Z</CreationDate>\n" +
-                "    </Bucket>\n" +
-                "  </Buckets>\n" +
-                "</ListAllMyBucketsResult>";
-
         LOG.info("listBuckets {}");
 
-        return Response.ok(responseBody, MediaType.APPLICATION_XML_TYPE).build();
+        List<ListAllMyBucketsResponse.Entry> buckets = getStorageBackend()
+                .listBuckets()
+                .stream()
+                .map(bucket -> new ListAllMyBucketsResponse.Entry(bucket.getName(), bucket.getCreationDate()))
+                .collect(Collectors.toList());
+
+        ListAllMyBucketsResponse response = new ListAllMyBucketsResponse(new ListAllMyBucketsResponse.Owner("foo", "bar"), buckets);
+
+        try {
+            return Response.ok(JaxbMarshaller.marshall(response), MediaType.APPLICATION_XML_TYPE).build();
+        } catch (Exception e) {
+            LOG.error("Unable to create xml response body", e);
+            return Response.serverError().build();
+        }
     }
 
 }
