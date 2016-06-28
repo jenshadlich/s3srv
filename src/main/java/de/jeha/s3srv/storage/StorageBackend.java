@@ -1,8 +1,5 @@
 package de.jeha.s3srv.storage;
 
-import de.jeha.s3srv.storage.S3Bucket;
-import de.jeha.s3srv.storage.S3Object;
-
 import java.util.List;
 
 /**
@@ -11,6 +8,8 @@ import java.util.List;
 public interface StorageBackend {
 
     void createBucket(String bucket);
+
+    boolean bucketExists(String bucket);
 
     List<S3Bucket> listBuckets();
 

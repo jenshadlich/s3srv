@@ -24,6 +24,11 @@ public class InMemoryStorageBackend implements StorageBackend {
     }
 
     @Override
+    public boolean bucketExists(String bucket) {
+        return buckets.containsKey(bucket);
+    }
+
+    @Override
     public List<S3Bucket> listBuckets() {
         return buckets.values().stream().collect(Collectors.toList());
     }

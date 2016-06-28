@@ -1,6 +1,7 @@
 package de.jeha.s3srv.operations.buckets;
 
 import com.codahale.metrics.annotation.Timed;
+import de.jeha.s3srv.api.ErrorCodes;
 import de.jeha.s3srv.operations.AbstractOperation;
 import de.jeha.s3srv.storage.StorageBackend;
 import org.slf4j.Logger;
@@ -37,11 +38,13 @@ public class CreateBucket extends AbstractOperation {
                                  @PathParam("bucket") String bucket) {
         LOG.info("createBucket {}", bucket);
 
-        getStorageBackend().createBucket(bucket);
-
-        response.addHeader("Location", "/" + bucket);
-
-        return Response.ok().build();
+        if (getStorageBackend().bucketExists(bucket)) {
+            return buildErrorResponse(ErrorCodes.BUCKET_ALREADY_EXISTS, bucket, null);
+        } else {
+            getStorageBackend().createBucket(bucket);
+            response.addHeader("Location", "/" + bucket);
+            return Response.ok().build();
+        }
     }
 
 }
