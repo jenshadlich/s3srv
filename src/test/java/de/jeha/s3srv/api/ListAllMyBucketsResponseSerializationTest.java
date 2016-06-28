@@ -1,12 +1,10 @@
 package de.jeha.s3srv.api;
 
+import de.jeha.s3srv.jaxb.JaxbMarshaller;
 import org.junit.Test;
 
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 import java.io.IOException;
-import java.io.StringWriter;
 import java.time.Instant;
 
 import static org.junit.Assert.assertEquals;
@@ -22,19 +20,9 @@ public class ListAllMyBucketsResponseSerializationTest {
                 new ListAllMyBucketsResponse.Owner("foo", "bar"),
                 new ListAllMyBucketsResponse.Entry("test", Instant.parse("2006-02-03T16:45:09.001Z")));
 
-        JAXBContext jaxbContext = JAXBContext.newInstance(ListAllMyBucketsResponse.class);
+        final String responseXml = JaxbMarshaller.marshall(response);
 
-        Marshaller marshaller = jaxbContext.createMarshaller();
-        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        marshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
-
-        StringWriter stringWriter = new StringWriter();
-        stringWriter.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-        stringWriter.append(System.lineSeparator());
-        marshaller.marshal(response, stringWriter);
-        stringWriter.close();
-
-        System.out.println(stringWriter.toString());
+        System.out.println(responseXml);
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<ListAllMyBucketsResponse xmlns=\"http://s3.amazonaws.com/doc/2006-03-01\">\n" +
@@ -50,6 +38,6 @@ public class ListAllMyBucketsResponseSerializationTest {
                 "    </Buckets>\n" +
                 "</ListAllMyBucketsResponse>";
 
-        assertEquals(expected, stringWriter.toString());
+        assertEquals(expected, responseXml);
     }
 }
