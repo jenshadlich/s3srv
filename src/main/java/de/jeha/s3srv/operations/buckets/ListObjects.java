@@ -36,7 +36,11 @@ public class ListObjects extends AbstractOperation {
         List<ListBucketResult.ContentsEntry> objects = getStorageBackend()
                 .listObjects(bucket)
                 .stream()
-                .map(object -> new ListBucketResult.ContentsEntry(object.getKey()))
+                .map(object -> new ListBucketResult.ContentsEntry(
+                        object.getKey(),
+                        object.getLastModified(),
+                        object.getETag(),
+                        object.getSize()))
                 .collect(Collectors.toList());
 
         ListBucketResult response = new ListBucketResult(bucket, 0, 1000, objects);

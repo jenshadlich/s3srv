@@ -52,8 +52,8 @@ public class ListAllMyBucketsResponse {
         @XmlElement(name = "Name")
         private String name;
 
-        @XmlElement(name = "CreationDate")
         @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+        @XmlElement(name = "CreationDate")
         private Instant creationDate;
 
         public BucketsEntry(String name, Instant creationDate) {

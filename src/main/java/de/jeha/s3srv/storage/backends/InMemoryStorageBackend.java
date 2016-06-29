@@ -9,6 +9,7 @@ import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.Instant;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,7 +51,7 @@ public class InMemoryStorageBackend implements StorageBackend {
         }
 
         final String objectKey = buildObjectKey(bucket, key);
-        final S3Object object = new S3Object(bucketObject, key, md5);
+        final S3Object object = new S3Object(bucketObject, key, md5, contentLength, Instant.now());
 
         objects.put(objectKey, object);
         objectContents.put(objectKey, content);
