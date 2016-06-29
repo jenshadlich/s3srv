@@ -22,17 +22,17 @@ public class ListAllMyBucketsResponse {
 
     @XmlElementWrapper(name = "Buckets")
     @XmlElement(name = "Bucket")
-    private List<Entry> buckets = new ArrayList<>();
+    private List<BucketsEntry> buckets = new ArrayList<>();
 
     public ListAllMyBucketsResponse() {
     }
 
-    public ListAllMyBucketsResponse(Owner owner, Entry... entries) {
+    public ListAllMyBucketsResponse(Owner owner, BucketsEntry... entries) {
         this.owner = owner;
         Collections.addAll(buckets, entries);
     }
 
-    public ListAllMyBucketsResponse(Owner owner, List<Entry> entries) {
+    public ListAllMyBucketsResponse(Owner owner, List<BucketsEntry> entries) {
         this.owner = owner;
         buckets.addAll(entries);
     }
@@ -52,7 +52,7 @@ public class ListAllMyBucketsResponse {
 
     }
 
-    public static class Entry {
+    public static class BucketsEntry {
 
         @XmlElement(name = "Name")
         private String name;
@@ -61,7 +61,7 @@ public class ListAllMyBucketsResponse {
         @XmlJavaTypeAdapter(InstantXmlAdapter.class)
         private Instant creationDate;
 
-        public Entry(String name, Instant creationDate) {
+        public BucketsEntry(String name, Instant creationDate) {
             this.name = name;
             this.creationDate = creationDate;
         }

@@ -3,8 +3,11 @@ package de.jeha.s3srv.storage.backends;
 import de.jeha.s3srv.storage.S3Bucket;
 import de.jeha.s3srv.storage.S3Object;
 import de.jeha.s3srv.storage.StorageBackend;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.io.IOUtils;
 
-import java.util.Collections;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +20,7 @@ public class InMemoryStorageBackend implements StorageBackend {
 
     private final Map<String, S3Bucket> buckets = new HashMap<>();
     private final Map<String, S3Object> objects = new HashMap<>();
+    private final Map<String, byte[]> objectContents = new HashMap<>();
 
     @Override
     public void createBucket(String bucket) {
@@ -24,7 +28,7 @@ public class InMemoryStorageBackend implements StorageBackend {
     }
 
     @Override
-    public boolean bucketExists(String bucket) {
+    public boolean existsBucket(String bucket) {
         return buckets.containsKey(bucket);
     }
 
@@ -34,19 +38,32 @@ public class InMemoryStorageBackend implements StorageBackend {
     }
 
     @Override
-    public void createObject(String bucket, String key) {
+    public S3Object createObject(String bucket, String key, InputStream contentStream, int contentLength) throws IOException {
         S3Bucket bucketObject = buckets.get(bucket);
-        objects.put(buildObjectKey(bucket, key), new S3Object(bucketObject, key));
+        byte[] content = IOUtils.readFully(contentStream, contentLength);
+        String md5 = DigestUtils.md5Hex(content);
+
+        final String objectKey = buildObjectKey(bucket, key);
+        final S3Object object = new S3Object(bucketObject, key, md5);
+
+        objects.put(objectKey, object);
+        objectContents.put(objectKey, content);
+
+        return object;
+    }
+
+    @Override
+    public boolean existsObject(String bucket, String key) {
+        return objects.containsKey(buildObjectKey(bucket, key));
     }
 
     @Override
     public List<S3Object> listObjects(String bucket) {
-        return Collections.emptyList();
+        return objects.values().stream().filter(v -> v.getBucket().getName().equals(bucket)).collect(Collectors.toList());
     }
 
     @Override
     public S3Object getObject(String bucket, String key) {
-        S3Bucket bucketObject = buckets.get(bucket);
         return objects.get(buildObjectKey(bucket, key));
     }
 
