@@ -39,6 +39,7 @@ public class CreateBucket extends AbstractOperation {
             return createErrorResponse(ErrorCodes.BUCKET_ALREADY_EXISTS, bucket, null);
         } else {
             getStorageBackend().createBucket(bucket);
+
             response.addHeader("Location", "/" + bucket);
             return Response.ok().build();
         }

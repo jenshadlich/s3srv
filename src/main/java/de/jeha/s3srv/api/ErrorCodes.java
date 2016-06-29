@@ -5,6 +5,11 @@ package de.jeha.s3srv.api;
  */
 public enum ErrorCodes {
 
+    BAD_DIGEST(
+            "BadDigest",
+            "The Content-MD5 you specified did not match what we received.",
+            400
+    ),
     BUCKET_ALREADY_EXISTS(
             "BucketAlreadyExists",
             "The requested bucket name is not available. The bucket namespace is shared by all users of the system. Please select a different name and try again.",

@@ -1,5 +1,6 @@
 package de.jeha.s3srv.storage.backends;
 
+import de.jeha.s3srv.storage.BadDigestException;
 import de.jeha.s3srv.storage.S3Bucket;
 import de.jeha.s3srv.storage.S3Object;
 import de.jeha.s3srv.storage.StorageBackend;
@@ -38,10 +39,15 @@ public class InMemoryStorageBackend implements StorageBackend {
     }
 
     @Override
-    public S3Object createObject(String bucket, String key, InputStream contentStream, int contentLength) throws IOException {
+    public S3Object createObject(String bucket, String key, InputStream contentStream, int contentLength,
+                                 String expectedMD5) throws IOException, BadDigestException {
         S3Bucket bucketObject = buckets.get(bucket);
         byte[] content = IOUtils.readFully(contentStream, contentLength);
         String md5 = DigestUtils.md5Hex(content);
+
+        if (md5.equals(expectedMD5)) {
+            throw new BadDigestException();
+        }
 
         final String objectKey = buildObjectKey(bucket, key);
         final S3Object object = new S3Object(bucketObject, key, md5);
