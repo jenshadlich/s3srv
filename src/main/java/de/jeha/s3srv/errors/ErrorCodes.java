@@ -19,6 +19,11 @@ public enum ErrorCodes {
             "InvalidBucketName",
             "The specified bucket is not valid.",
             400
+    ),
+    SERVICE_UNAVAILABLE(
+            "ServiceUnavailable",
+            "Reduce your request rate.",
+            503
     );
 
     private final String code;
