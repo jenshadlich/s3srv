@@ -1,5 +1,7 @@
 package de.jeha.s3srv.storage;
 
+import de.jeha.s3srv.errors.BadDigestException;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;

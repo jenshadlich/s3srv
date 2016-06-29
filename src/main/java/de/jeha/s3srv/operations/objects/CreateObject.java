@@ -1,9 +1,9 @@
 package de.jeha.s3srv.operations.objects;
 
 import com.codahale.metrics.annotation.Timed;
-import de.jeha.s3srv.api.ErrorCodes;
+import de.jeha.s3srv.errors.ErrorCodes;
 import de.jeha.s3srv.operations.AbstractOperation;
-import de.jeha.s3srv.storage.BadDigestException;
+import de.jeha.s3srv.errors.BadDigestException;
 import de.jeha.s3srv.storage.S3Object;
 import de.jeha.s3srv.storage.StorageBackend;
 import org.slf4j.Logger;
