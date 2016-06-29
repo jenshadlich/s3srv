@@ -27,11 +27,6 @@ public class ListAllMyBucketsResponse {
     public ListAllMyBucketsResponse() {
     }
 
-    public ListAllMyBucketsResponse(Owner owner, BucketsEntry... entries) {
-        this.owner = owner;
-        Collections.addAll(buckets, entries);
-    }
-
     public ListAllMyBucketsResponse(Owner owner, List<BucketsEntry> entries) {
         this.owner = owner;
         buckets.addAll(entries);

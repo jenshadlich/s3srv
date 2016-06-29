@@ -6,6 +6,7 @@ import org.junit.Test;
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.time.Instant;
+import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
 
@@ -18,7 +19,9 @@ public class ListAllMyBucketsResponseSerializationTest {
     public void test() throws JAXBException, IOException {
         ListAllMyBucketsResponse response = new ListAllMyBucketsResponse(
                 new ListAllMyBucketsResponse.Owner("foo", "bar"),
-                new ListAllMyBucketsResponse.BucketsEntry("test", Instant.parse("2006-02-03T16:45:09.001Z")));
+                Collections.singletonList(new ListAllMyBucketsResponse.BucketsEntry(
+                        "test",
+                        Instant.parse("2006-02-03T16:45:09.001Z"))));
 
         final String responseXml = JaxbMarshaller.marshall(response);
 
