@@ -43,7 +43,7 @@ public class ListObjects extends AbstractOperation {
                         object.getSize()))
                 .collect(Collectors.toList());
 
-        ListBucketResult response = new ListBucketResult(bucket, 0, 1000, objects);
+        ListBucketResult response = new ListBucketResult(bucket, objects.size(), 1000, objects);
 
         try {
             return Response.ok(JaxbMarshaller.marshall(response), MediaType.APPLICATION_XML_TYPE).build();
