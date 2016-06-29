@@ -42,7 +42,7 @@ public class CreateObject extends AbstractOperation {
         try {
             S3Object object = getStorageBackend().createObject(bucket, key, request.getInputStream(), request.getContentLength());
 
-            response.addHeader("ETag", "\"" + object.getMD5() + "\"");
+            response.addHeader("ETag", object.getETag());
             return Response.ok().build();
         } catch (IOException e) {
             LOG.error("Unable to read input stream", e);
