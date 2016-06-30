@@ -14,17 +14,18 @@ public class S3Object {
     private final String eTag;
     private final Integer size;
     private final Instant lastModified;
-    private final InputStream content;
+    private final InputStreamCallback inputStreamCallback;
     private final String contentType;
 
-    public S3Object(S3Bucket bucket, String key, String md5, Integer size, Instant lastModified, InputStream content, String contentType) {
+    public S3Object(S3Bucket bucket, String key, String md5, String eTag, Integer size, Instant lastModified,
+                    InputStreamCallback inputStreamCallback, String contentType) {
         this.bucket = bucket;
         this.key = key;
         this.md5 = md5;
-        this.eTag = "\"" + md5 + "\"";
+        this.eTag = eTag;
         this.size = size;
         this.lastModified = lastModified;
-        this.content = content;
+        this.inputStreamCallback = inputStreamCallback;
         this.contentType = contentType;
     }
 
@@ -52,8 +53,8 @@ public class S3Object {
         return lastModified;
     }
 
-    public InputStream getContent() {
-        return content;
+    public InputStream getInputStream() {
+        return inputStreamCallback.getInputStream();
     }
 
     public String getContentType() {

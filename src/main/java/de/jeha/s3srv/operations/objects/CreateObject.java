@@ -41,10 +41,15 @@ public class CreateObject extends AbstractOperation {
                                  @PathParam("key") String key) {
         LOG.info("createObject {}/{}", bucket, key);
 
-        String expectedMD5 = headers.getHeaderString("Content-MD5");
+        final String expectedMD5 = headers.getHeaderString("Content-MD5");
         try {
-            S3Object object = getStorageBackend()
-                    .createObject(bucket, key, request.getInputStream(), request.getContentLength(), expectedMD5, request.getContentType());
+            S3Object object = getStorageBackend().createObject(
+                    bucket,
+                    key,
+                    request.getInputStream(),
+                    request.getContentLength(),
+                    expectedMD5,
+                    request.getContentType());
 
             response.addHeader("ETag", object.getETag());
             return Response.ok().build();

@@ -38,7 +38,7 @@ public class GetObject extends AbstractOperation {
 
         if (getStorageBackend().existsObject(bucket, key)) {
             S3Object object = getStorageBackend().getObject(bucket, key);
-            return Response.ok(object.getContent()).type(object.getContentType()).build();
+            return Response.ok(object.getInputStream()).type(object.getContentType()).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
         }

@@ -4,6 +4,8 @@ import de.jeha.s3srv.errors.BadDigestException;
 import de.jeha.s3srv.storage.S3Bucket;
 import de.jeha.s3srv.storage.S3Object;
 import de.jeha.s3srv.storage.StorageBackend;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.IOUtils;
 
@@ -42,17 +44,29 @@ public class InMemoryStorageBackend implements StorageBackend {
 
     @Override
     public S3Object createObject(String bucket, String key, InputStream contentStream, int contentLength,
-                                 String expectedMD5, String contentType) throws IOException, BadDigestException {
-        S3Bucket bucketObject = buckets.get(bucket);
-        byte[] content = IOUtils.readFully(contentStream, contentLength);
-        String md5 = DigestUtils.md5Hex(content);
+                                 String expectedMD5, String contentType)
+            throws IOException, BadDigestException {
 
-        if (md5.equals(expectedMD5)) {
-            throw new BadDigestException();
+        final S3Bucket bucketObject = buckets.get(bucket);
+        final byte[] content = IOUtils.readFully(contentStream, contentLength);
+
+        final byte[] md5 = DigestUtils.md5(content);
+        final String md5Base64 = Base64.encodeBase64String(md5);
+
+        if (!md5Base64.equals(expectedMD5)) {
+            throw new BadDigestException(String.format("MD5 mismatch: expected '%s' but got '%s'", expectedMD5, md5Base64));
         }
 
         final String objectKey = buildObjectKey(bucket, key);
-        final S3Object object = new S3Object(bucketObject, key, md5, contentLength, Instant.now(), new ByteArrayInputStream(content), contentType);
+        final S3Object object = new S3Object(
+                bucketObject,
+                key,
+                md5Base64,
+                computeETag(md5),
+                contentLength,
+                Instant.now(),
+                () -> new ByteArrayInputStream(content),
+                contentType);
 
         objects.put(objectKey, object);
         objectContents.put(objectKey, content);
@@ -67,7 +81,10 @@ public class InMemoryStorageBackend implements StorageBackend {
 
     @Override
     public List<S3Object> listObjects(String bucket) {
-        return objects.values().stream().filter(v -> v.getBucket().getName().equals(bucket)).collect(Collectors.toList());
+        return objects.values()
+                .stream()
+                .filter(value -> value.getBucket().getName().equals(bucket))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -79,6 +96,10 @@ public class InMemoryStorageBackend implements StorageBackend {
 
     private String buildObjectKey(String bucket, String key) {
         return bucket + "/" + key;
+    }
+
+    private String computeETag(byte[] md5) {
+        return '"' + Hex.encodeHexString(md5) + '"';
     }
 
 }
