@@ -29,7 +29,7 @@ public class ExistsObject extends AbstractOperation {
     @HEAD
     @Path("/{bucket}/{key}")
     @Timed
-    public Response createBucket(@Context HttpHeaders headers,
+    public Response existsObject(@Context HttpHeaders headers,
                                  @Context HttpServletResponse response,
                                  @PathParam("bucket") String bucket,
                                  @PathParam("key") String key) {
