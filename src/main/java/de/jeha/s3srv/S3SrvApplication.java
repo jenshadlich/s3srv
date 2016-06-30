@@ -21,13 +21,13 @@ import java.util.logging.Logger;
 /**
  * @author jenshadlich@googlemail.com
  */
-public class S3SrvService extends Application<S3SrvConfiguration> {
+public class S3SrvApplication extends Application<S3SrvConfiguration> {
 
     private static final String APPLICATION_NAME = "s3srv";
 
     public static void main(String... args) throws Exception {
         Locale.setDefault(Locale.ENGLISH);
-        new S3SrvService().run(args);
+        new S3SrvApplication().run(args);
     }
 
     @Override
