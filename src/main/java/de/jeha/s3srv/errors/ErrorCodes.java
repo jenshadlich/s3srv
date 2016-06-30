@@ -24,6 +24,11 @@ public enum ErrorCodes {
             "ServiceUnavailable",
             "Reduce your request rate.",
             503
+    ),
+    SIGNATURE_DOES_NOT_MATCH(
+            "SignatureDoesNotMatch",
+            "The request signature we calculated does not match the signature you provided. Check your secret access key and signing method.",
+            403
     );
 
     private final String code;
