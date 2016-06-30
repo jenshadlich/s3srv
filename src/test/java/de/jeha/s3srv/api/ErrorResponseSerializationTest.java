@@ -1,7 +1,7 @@
 package de.jeha.s3srv.api;
 
 import de.jeha.s3srv.errors.ErrorCodes;
-import de.jeha.s3srv.jaxb.JaxbMarshaller;
+import de.jeha.s3srv.xml.JaxbMarshaller;
 import org.junit.Test;
 
 import javax.xml.bind.JAXBException;

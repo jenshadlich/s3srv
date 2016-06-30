@@ -1,6 +1,6 @@
 package de.jeha.s3srv.api;
 
-import de.jeha.s3srv.jaxb.InstantXmlAdapter;
+import de.jeha.s3srv.xml.InstantXmlAdapter;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**

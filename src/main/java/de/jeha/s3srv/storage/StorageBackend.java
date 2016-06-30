@@ -17,7 +17,8 @@ public interface StorageBackend {
 
     boolean existsBucket(String bucket);
 
-    S3Object createObject(String bucket, String key, InputStream contentStream, int contentLength, String expectedMD5)
+    S3Object createObject(String bucket, String key, InputStream contentStream, int contentLength, String expectedMD5,
+                          String contentType)
             throws IOException, BadDigestException;
 
     boolean existsObject(String bucket, String key);

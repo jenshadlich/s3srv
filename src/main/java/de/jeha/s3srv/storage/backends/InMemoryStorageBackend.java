@@ -7,6 +7,7 @@ import de.jeha.s3srv.storage.StorageBackend;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.IOUtils;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.Instant;
@@ -41,7 +42,7 @@ public class InMemoryStorageBackend implements StorageBackend {
 
     @Override
     public S3Object createObject(String bucket, String key, InputStream contentStream, int contentLength,
-                                 String expectedMD5) throws IOException, BadDigestException {
+                                 String expectedMD5, String contentType) throws IOException, BadDigestException {
         S3Bucket bucketObject = buckets.get(bucket);
         byte[] content = IOUtils.readFully(contentStream, contentLength);
         String md5 = DigestUtils.md5Hex(content);
@@ -51,7 +52,7 @@ public class InMemoryStorageBackend implements StorageBackend {
         }
 
         final String objectKey = buildObjectKey(bucket, key);
-        final S3Object object = new S3Object(bucketObject, key, md5, contentLength, Instant.now());
+        final S3Object object = new S3Object(bucketObject, key, md5, contentLength, Instant.now(), new ByteArrayInputStream(content), contentType);
 
         objects.put(objectKey, object);
         objectContents.put(objectKey, content);

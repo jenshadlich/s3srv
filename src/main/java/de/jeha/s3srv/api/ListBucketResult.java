@@ -1,6 +1,6 @@
 package de.jeha.s3srv.api;
 
-import de.jeha.s3srv.jaxb.InstantXmlAdapter;
+import de.jeha.s3srv.xml.InstantXmlAdapter;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;

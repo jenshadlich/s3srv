@@ -1,4 +1,4 @@
-package de.jeha.s3srv.jaxb;
+package de.jeha.s3srv.xml;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;

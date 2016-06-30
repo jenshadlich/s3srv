@@ -2,7 +2,7 @@ package de.jeha.s3srv.operations.service;
 
 import com.codahale.metrics.annotation.Timed;
 import de.jeha.s3srv.api.ListAllMyBucketsResponse;
-import de.jeha.s3srv.jaxb.JaxbMarshaller;
+import de.jeha.s3srv.xml.JaxbMarshaller;
 import de.jeha.s3srv.operations.AbstractOperation;
 import de.jeha.s3srv.storage.StorageBackend;
 import org.slf4j.Logger;

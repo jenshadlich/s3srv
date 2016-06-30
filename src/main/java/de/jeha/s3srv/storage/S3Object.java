@@ -1,5 +1,6 @@
 package de.jeha.s3srv.storage;
 
+import java.io.InputStream;
 import java.time.Instant;
 
 /**
@@ -13,14 +14,18 @@ public class S3Object {
     private final String eTag;
     private final Integer size;
     private final Instant lastModified;
+    private final InputStream content;
+    private final String contentType;
 
-    public S3Object(S3Bucket bucket, String key, String md5, Integer size, Instant lastModified) {
+    public S3Object(S3Bucket bucket, String key, String md5, Integer size, Instant lastModified, InputStream content, String contentType) {
         this.bucket = bucket;
         this.key = key;
         this.md5 = md5;
         this.eTag = "\"" + md5 + "\"";
         this.size = size;
         this.lastModified = lastModified;
+        this.content = content;
+        this.contentType = contentType;
     }
 
     public S3Bucket getBucket() {
@@ -45,6 +50,14 @@ public class S3Object {
 
     public Instant getLastModified() {
         return lastModified;
+    }
+
+    public InputStream getContent() {
+        return content;
+    }
+
+    public String getContentType() {
+        return contentType;
     }
 
 }

@@ -1,4 +1,4 @@
-package de.jeha.s3srv.jaxb;
+package de.jeha.s3srv.xml;
 
 import de.jeha.s3srv.api.ErrorResponse;
 import de.jeha.s3srv.api.ListAllMyBucketsResponse;
