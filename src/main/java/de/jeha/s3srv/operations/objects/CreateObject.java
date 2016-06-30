@@ -51,8 +51,9 @@ public class CreateObject extends AbstractOperation {
                     expectedMD5,
                     request.getContentType());
 
-            response.addHeader("ETag", object.getETag());
-            return Response.ok().build();
+            return Response.ok()
+                    .header("ETag", object.getETag())
+                    .build();
         } catch (IOException e) {
             LOG.error("Unable to read input stream", e);
             return Response.serverError().build();
