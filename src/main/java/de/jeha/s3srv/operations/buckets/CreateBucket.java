@@ -40,8 +40,11 @@ public class CreateBucket extends AbstractOperation {
         } else {
             getStorageBackend().createBucket(bucket);
 
-            response.addHeader("Location", "/" + bucket);
-            return Response.ok().build();
+            return Response.ok()
+                    .header("Location", "/" + bucket)
+                    .header("Content-Length", "0")
+                    .header("Connection", "close")
+                    .build();
         }
     }
 
