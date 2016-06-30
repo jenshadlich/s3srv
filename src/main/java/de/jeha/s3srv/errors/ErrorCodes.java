@@ -20,6 +20,11 @@ public enum ErrorCodes {
             "The specified bucket is not valid.",
             400
     ),
+    INTERNAL_ERROR(
+            "InternalError",
+            "We encountered an internal error. Please try again.",
+            500
+    ),
     SERVICE_UNAVAILABLE(
             "ServiceUnavailable",
             "Reduce your request rate.",

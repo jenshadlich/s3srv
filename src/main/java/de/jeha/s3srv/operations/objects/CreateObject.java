@@ -1,9 +1,9 @@
 package de.jeha.s3srv.operations.objects;
 
 import com.codahale.metrics.annotation.Timed;
+import de.jeha.s3srv.errors.BadDigestException;
 import de.jeha.s3srv.errors.ErrorCodes;
 import de.jeha.s3srv.operations.AbstractOperation;
-import de.jeha.s3srv.errors.BadDigestException;
 import de.jeha.s3srv.storage.S3Object;
 import de.jeha.s3srv.storage.StorageBackend;
 import org.slf4j.Logger;
@@ -56,9 +56,9 @@ public class CreateObject extends AbstractOperation {
                     .build();
         } catch (IOException e) {
             LOG.error("Unable to read input stream", e);
-            return Response.serverError().build();
+            return createErrorResponse(ErrorCodes.INTERNAL_ERROR, "/" + bucket + "/" + key, null);
         } catch (BadDigestException e) {
-            return createErrorResponse(ErrorCodes.BAD_DIGEST, bucket + "/" + key, null);
+            return createErrorResponse(ErrorCodes.BAD_DIGEST, "/" + bucket + "/" + key, null);
         }
     }
 

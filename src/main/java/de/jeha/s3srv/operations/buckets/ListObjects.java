@@ -2,9 +2,10 @@ package de.jeha.s3srv.operations.buckets;
 
 import com.codahale.metrics.annotation.Timed;
 import de.jeha.s3srv.api.ListBucketResult;
-import de.jeha.s3srv.xml.JaxbMarshaller;
+import de.jeha.s3srv.errors.ErrorCodes;
 import de.jeha.s3srv.operations.AbstractOperation;
 import de.jeha.s3srv.storage.StorageBackend;
+import de.jeha.s3srv.xml.JaxbMarshaller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,7 +34,7 @@ public class ListObjects extends AbstractOperation {
     public Response listBuckets(@PathParam("bucket") String bucket) {
         LOG.info("listObjects {}", bucket);
 
-        if(!getStorageBackend().existsBucket(bucket)) {
+        if (!getStorageBackend().existsBucket(bucket)) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
@@ -53,7 +54,7 @@ public class ListObjects extends AbstractOperation {
             return Response.ok(JaxbMarshaller.marshall(response), MediaType.APPLICATION_XML_TYPE).build();
         } catch (Exception e) {
             LOG.error("Unable to create xml response body", e);
-            return Response.serverError().build();
+            return createErrorResponse(ErrorCodes.INTERNAL_ERROR, "/" + bucket, null);
         }
     }
 }
