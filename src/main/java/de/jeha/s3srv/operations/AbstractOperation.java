@@ -40,6 +40,7 @@ public abstract class AbstractOperation {
                     .build();
         } catch (IOException | JAXBException e) {
             LOG.error("Unable to create xml error response body", e);
+            // TODO: add compliant internal server error
             return Response.serverError().build();
         }
     }
