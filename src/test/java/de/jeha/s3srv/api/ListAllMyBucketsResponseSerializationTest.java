@@ -28,7 +28,7 @@ public class ListAllMyBucketsResponseSerializationTest {
         System.out.println(responseXml);
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-                "<ListAllMyBucketsResponse xmlns=\"http://s3.amazonaws.com/doc/2006-03-01\">\n" +
+                "<ListAllMyBucketsResponse xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">\n" +
                 "    <Owner>\n" +
                 "        <ID>foo</ID>\n" +
                 "        <DisplayName>bar</DisplayName>\n" +

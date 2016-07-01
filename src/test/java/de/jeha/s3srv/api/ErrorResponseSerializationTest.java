@@ -24,7 +24,7 @@ public class ErrorResponseSerializationTest {
         System.out.println(responseXml);
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-                "<Error xmlns=\"http://s3.amazonaws.com/doc/2006-03-01\">\n" +
+                "<Error xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">\n" +
                 "    <Code>ServiceUnavailable</Code>\n" +
                 "    <Message>Reduce your request rate.</Message>\n" +
                 "</Error>";

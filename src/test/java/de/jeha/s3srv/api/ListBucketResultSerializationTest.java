@@ -32,7 +32,7 @@ public class ListBucketResultSerializationTest {
         System.out.println(responseXml);
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-                "<ListBucketResult xmlns=\"http://s3.amazonaws.com/doc/2006-03-01\">\n" +
+                "<ListBucketResult xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">\n" +
                 "    <Name>test-bucket</Name>\n" +
                 "    <KeyCount>1</KeyCount>\n" +
                 "    <MaxKeys>1000</MaxKeys>\n" +
