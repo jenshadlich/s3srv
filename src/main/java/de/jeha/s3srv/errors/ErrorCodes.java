@@ -15,6 +15,11 @@ public enum ErrorCodes {
             "The requested bucket name is not available. The bucket namespace is shared by all users of the system. Please select a different name and try again.",
             409
     ),
+    BUCKET_NOT_EMPTY(
+            "BucketNotEmpty",
+            "The bucket you tried to delete is not empty.",
+            409
+    ),
     INVALID_BUCKET_NAME(
             "InvalidBucketName",
             "The specified bucket is not valid.",

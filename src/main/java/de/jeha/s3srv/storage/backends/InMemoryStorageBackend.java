@@ -43,6 +43,11 @@ public class InMemoryStorageBackend implements StorageBackend {
     }
 
     @Override
+    public void deleteBucket(String bucket) {
+        buckets.remove(bucket);
+    }
+
+    @Override
     public S3Object createObject(String bucket, String key, InputStream contentStream, int contentLength,
                                  String expectedMD5, String contentType)
             throws IOException, BadDigestException {

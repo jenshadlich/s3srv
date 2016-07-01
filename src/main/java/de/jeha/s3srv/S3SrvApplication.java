@@ -2,6 +2,7 @@ package de.jeha.s3srv;
 
 import de.jeha.s3srv.config.S3SrvConfiguration;
 import de.jeha.s3srv.operations.buckets.CreateBucket;
+import de.jeha.s3srv.operations.buckets.DeleteBucket;
 import de.jeha.s3srv.operations.buckets.ExistsBucket;
 import de.jeha.s3srv.operations.buckets.ListObjects;
 import de.jeha.s3srv.operations.objects.CreateObject;
@@ -51,6 +52,7 @@ public class S3SrvApplication extends Application<S3SrvConfiguration> {
         // buckets
         environment.jersey().register(new CreateBucket(storageBackend));
         environment.jersey().register(new ExistsBucket(storageBackend));
+        environment.jersey().register(new DeleteBucket(storageBackend));
         environment.jersey().register(new ListObjects(storageBackend));
 
         // objects
