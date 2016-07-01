@@ -6,6 +6,7 @@ import de.jeha.s3srv.operations.buckets.DeleteBucket;
 import de.jeha.s3srv.operations.buckets.ExistsBucket;
 import de.jeha.s3srv.operations.buckets.ListObjects;
 import de.jeha.s3srv.operations.objects.CreateObject;
+import de.jeha.s3srv.operations.objects.DeleteObject;
 import de.jeha.s3srv.operations.objects.ExistsObject;
 import de.jeha.s3srv.operations.objects.GetObject;
 import de.jeha.s3srv.operations.service.ListBuckets;
@@ -58,6 +59,7 @@ public class S3SrvApplication extends Application<S3SrvConfiguration> {
         // objects
         environment.jersey().register(new CreateObject(storageBackend));
         environment.jersey().register(new ExistsObject(storageBackend));
+        environment.jersey().register(new DeleteObject(storageBackend));
         environment.jersey().register(new GetObject(storageBackend));
 
         // print request / response headers

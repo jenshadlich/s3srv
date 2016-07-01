@@ -97,6 +97,14 @@ public class InMemoryStorageBackend implements StorageBackend {
         return objects.get(buildObjectKey(bucket, key));
     }
 
+    @Override
+    public void deleteObject(String bucket, String key) {
+        final String objectKey = buildObjectKey(bucket, key);
+
+        objects.remove(objectKey);
+        objectContents.remove(objectKey);
+    }
+
     // -----------------------------------------------------------------------------------------------------------------
 
     private String buildObjectKey(String bucket, String key) {

@@ -29,4 +29,6 @@ public interface StorageBackend {
 
     S3Object getObject(String bucket, String key);
 
+    void deleteObject(String bucket, String key);
+
 }
