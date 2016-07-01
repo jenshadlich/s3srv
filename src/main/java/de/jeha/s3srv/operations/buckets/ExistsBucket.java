@@ -35,9 +35,11 @@ public class ExistsBucket extends AbstractOperation {
         LOG.info("existsBucket {}", bucket);
 
         if (getStorageBackend().existsBucket(bucket)) {
-            return Response.ok().build();
+            return Response.ok()
+                    .build();
         } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return Response.status(Response.Status.NOT_FOUND)
+                    .build();
         }
     }
 

@@ -45,7 +45,8 @@ public class GetObject extends AbstractOperation {
                     .header("Content-Length", Integer.toString(object.getSize()))
                     .build();
         } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return Response.status(Response.Status.NOT_FOUND)
+                    .build();
         }
     }
 

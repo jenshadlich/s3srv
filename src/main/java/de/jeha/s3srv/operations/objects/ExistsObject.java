@@ -36,9 +36,11 @@ public class ExistsObject extends AbstractOperation {
         LOG.info("existsObject {}/{}", bucket, key);
 
         if (getStorageBackend().existsObject(bucket, key)) {
-            return Response.ok().build();
+            return Response.ok()
+                    .build();
         } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return Response.status(Response.Status.NOT_FOUND)
+                    .build();
         }
     }
 

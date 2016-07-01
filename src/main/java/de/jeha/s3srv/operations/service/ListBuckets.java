@@ -44,7 +44,8 @@ public class ListBuckets extends AbstractOperation {
                 new ListAllMyBucketsResponse(new ListAllMyBucketsResponse.Owner("foo", "bar"), buckets);
 
         try {
-            return Response.ok(JaxbMarshaller.marshall(response), MediaType.APPLICATION_XML_TYPE).build();
+            return Response.ok(JaxbMarshaller.marshall(response), MediaType.APPLICATION_XML_TYPE)
+                    .build();
         } catch (Exception e) {
             LOG.error("Unable to create xml response body", e);
             return createErrorResponse(ErrorCodes.INTERNAL_ERROR, "/", null);

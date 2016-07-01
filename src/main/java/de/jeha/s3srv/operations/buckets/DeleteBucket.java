@@ -37,7 +37,8 @@ public class DeleteBucket extends AbstractOperation {
         LOG.info("deleteBucket {}", bucket);
 
         if (!getStorageBackend().existsBucket(bucket)) {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return Response.status(Response.Status.NOT_FOUND)
+                    .build();
         }
 
         if (!getStorageBackend().listObjects(bucket).isEmpty()) {

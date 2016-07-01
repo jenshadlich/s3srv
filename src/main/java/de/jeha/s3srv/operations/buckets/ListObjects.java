@@ -51,7 +51,8 @@ public class ListObjects extends AbstractOperation {
         ListBucketResult response = new ListBucketResult(bucket, objects.size(), 1000, objects);
 
         try {
-            return Response.ok(JaxbMarshaller.marshall(response), MediaType.APPLICATION_XML_TYPE).build();
+            return Response.ok(JaxbMarshaller.marshall(response), MediaType.APPLICATION_XML_TYPE)
+                    .build();
         } catch (Exception e) {
             LOG.error("Unable to create xml response body", e);
             return createErrorResponse(ErrorCodes.INTERNAL_ERROR, "/" + bucket, null);
