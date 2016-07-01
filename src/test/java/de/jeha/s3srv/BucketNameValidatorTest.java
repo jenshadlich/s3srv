@@ -14,20 +14,21 @@ public class BucketNameValidatorTest {
 
         // valid
 /*
-        assertTrue(BucketNameValidator.isValid("abc"));
-        assertTrue(BucketNameValidator.isValid("myawsbucket"));
-        assertTrue(BucketNameValidator.isValid("my.aws.bucket"));
-        assertTrue(BucketNameValidator.isValid("myawsbucket.1"));
+        assertTrue(BucketNameValidator.isValid("buc"));
+        assertTrue(BucketNameValidator.isValid("mybucket"));
+        assertTrue(BucketNameValidator.isValid("my.bucket"));
+        assertTrue(BucketNameValidator.isValid("mybucket.1"));
+        assertTrue(BucketNameValidator.isValid("my-bucket"));
 */
         // not valid, too short
-        assertFalse(BucketNameValidator.isValid("a"));
-        assertFalse(BucketNameValidator.isValid("ab"));
+        assertFalse(BucketNameValidator.isValid("b"));
+        assertFalse(BucketNameValidator.isValid("bu"));
 
         // not valid
         assertFalse(BucketNameValidator.isValid(null));
-        assertFalse(BucketNameValidator.isValid(".myawsbucket"));
-        assertFalse(BucketNameValidator.isValid("myawsbucket."));
-        assertFalse(BucketNameValidator.isValid("my..examplebucket"));
+        assertFalse(BucketNameValidator.isValid(".mybucket"));
+        assertFalse(BucketNameValidator.isValid("mybucket."));
+        assertFalse(BucketNameValidator.isValid("my..bucket"));
     }
 
 }
