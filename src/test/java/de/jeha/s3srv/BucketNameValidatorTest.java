@@ -26,6 +26,7 @@ public class BucketNameValidatorTest {
 
         // not valid
         assertFalse(BucketNameValidator.isValid(null));
+        assertFalse(BucketNameValidator.isValid("192.168.5.4"));
         assertFalse(BucketNameValidator.isValid(".mybucket"));
         assertFalse(BucketNameValidator.isValid("mybucket."));
         assertFalse(BucketNameValidator.isValid("my..bucket"));
