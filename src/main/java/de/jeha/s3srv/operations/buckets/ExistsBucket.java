@@ -34,13 +34,13 @@ public class ExistsBucket extends AbstractOperation {
                                  @PathParam("bucket") String bucket) {
         LOG.info("existsBucket {}", bucket);
 
-        if (getStorageBackend().existsBucket(bucket)) {
-            return Response.ok()
-                    .build();
-        } else {
+        if (!getStorageBackend().existsBucket(bucket)) {
             return Response.status(Response.Status.NOT_FOUND)
                     .build();
         }
+
+        return Response.ok()
+                .build();
     }
 
 }
