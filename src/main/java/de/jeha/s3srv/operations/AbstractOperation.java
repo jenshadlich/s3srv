@@ -1,6 +1,6 @@
 package de.jeha.s3srv.operations;
 
-import de.jeha.s3srv.errors.ErrorCodes;
+import de.jeha.s3srv.common.errors.ErrorCodes;
 import de.jeha.s3srv.api.ErrorResponse;
 import de.jeha.s3srv.xml.JaxbMarshaller;
 import de.jeha.s3srv.storage.StorageBackend;

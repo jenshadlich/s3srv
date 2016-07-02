@@ -1,4 +1,4 @@
-package de.jeha.s3srv.errors;
+package de.jeha.s3srv.common.errors;
 
 /**
  * @author jenshadlich@googlemail.com

@@ -1,7 +1,7 @@
 package de.jeha.s3srv.storage.backends;
 
-import de.jeha.s3srv.errors.BadDigestException;
-import de.jeha.s3srv.storage.S3Object;
+import de.jeha.s3srv.common.errors.BadDigestException;
+import de.jeha.s3srv.common.S3Object;
 import de.jeha.s3srv.storage.StorageBackend;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;

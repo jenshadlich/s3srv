@@ -1,7 +1,7 @@
 package de.jeha.s3srv.operations.buckets;
 
 import com.codahale.metrics.annotation.Timed;
-import de.jeha.s3srv.errors.ErrorCodes;
+import de.jeha.s3srv.common.errors.ErrorCodes;
 import de.jeha.s3srv.operations.AbstractOperation;
 import de.jeha.s3srv.storage.StorageBackend;
 import org.slf4j.Logger;

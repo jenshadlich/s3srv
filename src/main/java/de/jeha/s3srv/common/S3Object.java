@@ -1,4 +1,6 @@
-package de.jeha.s3srv.storage;
+package de.jeha.s3srv.common;
+
+import de.jeha.s3srv.storage.InputStreamCallback;
 
 import java.io.InputStream;
 import java.time.Instant;

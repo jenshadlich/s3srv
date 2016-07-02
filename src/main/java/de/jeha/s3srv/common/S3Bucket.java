@@ -1,4 +1,4 @@
-package de.jeha.s3srv.storage;
+package de.jeha.s3srv.common;
 
 import java.time.Instant;
 

@@ -1,4 +1,4 @@
-package de.jeha.s3srv;
+package de.jeha.s3srv.common;
 
 import java.util.regex.Pattern;
 

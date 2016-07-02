@@ -1,5 +1,6 @@
-package de.jeha.s3srv;
+package de.jeha.s3srv.common;
 
+import de.jeha.s3srv.common.BucketNameValidator;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
