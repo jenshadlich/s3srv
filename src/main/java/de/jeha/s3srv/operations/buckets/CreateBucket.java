@@ -41,11 +41,11 @@ public class CreateBucket extends AbstractOperation {
             BucketNameValidator.isValid(bucket);
         } catch (ValidationException e) {
             LOG.info("Invalid bucket name: {}", e.getMessage());
-            return createErrorResponse(ErrorCodes.INVALID_BUCKET_NAME, bucket, null);
+            return createErrorResponse(ErrorCodes.INVALID_BUCKET_NAME, "/" + bucket, null);
         }
 
         if (getStorageBackend().existsBucket(bucket)) {
-            return createErrorResponse(ErrorCodes.BUCKET_ALREADY_EXISTS, bucket, null);
+            return createErrorResponse(ErrorCodes.BUCKET_ALREADY_EXISTS, "/" + bucket, null);
         } else {
             getStorageBackend().createBucket(bucket);
 
