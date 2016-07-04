@@ -15,16 +15,67 @@ public class BucketNameValidator {
      * Validate the given bucket name.
      *
      * @param bucket name of bucket
-     * @return true if valid, otherwise false
+     * @return true if valid
+     * @throws IllegalArgumentException if not valid
      */
-    public static boolean isValid(String bucket) {
+    public static boolean isValid(String bucket)
+            throws IllegalArgumentException {
 
-        if (bucket == null || bucket.length() < MIN_BUCKET_LENGTH || bucket.length() > MAX_BUCKET_LENGTH) {
-            return false;
+        if (bucket == null) {
+            throw new IllegalArgumentException("bucket must not be null");
+        }
+
+        if (bucket.length() < MIN_BUCKET_LENGTH || bucket.length() > MAX_BUCKET_LENGTH) {
+            final String message = "bucket length must be between " + MIN_BUCKET_LENGTH + " and " + MAX_BUCKET_LENGTH;
+            throw new IllegalArgumentException(message);
         }
 
         if (IPV4_PATTERN.matcher(bucket).matches()) {
-            return false;
+            throw new IllegalArgumentException("bucket must no be formatted like an IP address");
+        }
+
+        int prev = -1;
+        for (int i = 0; i < bucket.length(); ++i) {
+            int next = bucket.charAt(i);
+
+            if (Character.isUpperCase(next)) {
+                throw new IllegalArgumentException("bucket must not contain uppercase characters");
+            }
+
+            if (Character.isWhitespace(next)) {
+                throw new IllegalArgumentException("bucket must not contain whitespaces");
+            }
+
+            if (next == '.') {
+                if (prev == -1) {
+                    throw new IllegalArgumentException("bucket must not begin with a period");
+                }
+                if (prev == '.') {
+                    throw new IllegalArgumentException("bucket must not contain two adjacent periods");
+                }
+                if (prev == '-') {
+                    throw new IllegalArgumentException("bucket must not contain dashes next to periods");
+                }
+            } else {
+                if (next == '-') {
+                    if (prev == '.') {
+                        throw new IllegalArgumentException("bucket must not contain dashes next to periods");
+                    }
+                    if (prev == -1) {
+                        throw new IllegalArgumentException("bucket must not begin with a '-'");
+                    }
+                } else {
+                    if (!Character.isDigit(next) && !Character.isLetter(next)) {
+                        throw new IllegalArgumentException("bucket must not contain '" + (char) next + "'");
+                    }
+                }
+            }
+
+            prev = next;
+        }
+
+        if (prev == '.' || prev == '-') {
+            throw new IllegalArgumentException("Bucket must not end with '-' or '.'");
         }
 
         return true;
