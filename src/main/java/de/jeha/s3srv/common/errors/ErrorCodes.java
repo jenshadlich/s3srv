@@ -20,6 +20,11 @@ public enum ErrorCodes {
             "The bucket you tried to delete is not empty.",
             409
     ),
+    INVALID_ACCESS_KEY_ID(
+            "InvalidAccessKeyId",
+            "The AWS access key Id you provided does not exist in our records.",
+            403
+    ),
     INVALID_BUCKET_NAME(
             "InvalidBucketName",
             "The specified bucket is not valid.",
