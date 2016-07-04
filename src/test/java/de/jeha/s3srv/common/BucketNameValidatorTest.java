@@ -2,6 +2,8 @@ package de.jeha.s3srv.common;
 
 import org.junit.Test;
 
+import javax.validation.ValidationException;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.Assert.assertTrue;
 
@@ -22,15 +24,15 @@ public class BucketNameValidatorTest {
     @Test
     public void testInvalidNames() {
         // too short
-        assertThatThrownBy(() -> BucketNameValidator.isValid("b")).isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> BucketNameValidator.isValid("bu")).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> BucketNameValidator.isValid("b")).isInstanceOf(ValidationException.class);
+        assertThatThrownBy(() -> BucketNameValidator.isValid("bu")).isInstanceOf(ValidationException.class);
 
-        assertThatThrownBy(() -> BucketNameValidator.isValid(null)).isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> BucketNameValidator.isValid("MyBucket")).isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> BucketNameValidator.isValid("192.168.5.4")).isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> BucketNameValidator.isValid(".mybucket")).isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> BucketNameValidator.isValid("mybucket.")).isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> BucketNameValidator.isValid("my..bucket")).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> BucketNameValidator.isValid(null)).isInstanceOf(ValidationException.class);
+        assertThatThrownBy(() -> BucketNameValidator.isValid("MyBucket")).isInstanceOf(ValidationException.class);
+        assertThatThrownBy(() -> BucketNameValidator.isValid("192.168.5.4")).isInstanceOf(ValidationException.class);
+        assertThatThrownBy(() -> BucketNameValidator.isValid(".mybucket")).isInstanceOf(ValidationException.class);
+        assertThatThrownBy(() -> BucketNameValidator.isValid("mybucket.")).isInstanceOf(ValidationException.class);
+        assertThatThrownBy(() -> BucketNameValidator.isValid("my..bucket")).isInstanceOf(ValidationException.class);
     }
 
 }

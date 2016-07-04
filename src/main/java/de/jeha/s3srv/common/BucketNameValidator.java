@@ -1,5 +1,6 @@
 package de.jeha.s3srv.common;
 
+import javax.validation.ValidationException;
 import java.util.regex.Pattern;
 
 /**
@@ -16,22 +17,22 @@ public class BucketNameValidator {
      *
      * @param bucket name of bucket
      * @return true if valid
-     * @throws IllegalArgumentException if not valid
+     * @throws ValidationException if not valid
      */
     public static boolean isValid(String bucket)
-            throws IllegalArgumentException {
+            throws ValidationException {
 
         if (bucket == null) {
-            throw new IllegalArgumentException("bucket must not be null");
+            throw new ValidationException("bucket must not be null");
         }
 
         if (bucket.length() < MIN_BUCKET_LENGTH || bucket.length() > MAX_BUCKET_LENGTH) {
             final String message = "bucket length must be between " + MIN_BUCKET_LENGTH + " and " + MAX_BUCKET_LENGTH;
-            throw new IllegalArgumentException(message);
+            throw new ValidationException(message);
         }
 
         if (IPV4_PATTERN.matcher(bucket).matches()) {
-            throw new IllegalArgumentException("bucket must no be formatted like an IP address");
+            throw new ValidationException("bucket must no be formatted like an IP address");
         }
 
         int prev = -1;
@@ -39,34 +40,34 @@ public class BucketNameValidator {
             int next = bucket.charAt(i);
 
             if (Character.isUpperCase(next)) {
-                throw new IllegalArgumentException("bucket must not contain uppercase characters");
+                throw new ValidationException("bucket must not contain uppercase characters");
             }
 
             if (Character.isWhitespace(next)) {
-                throw new IllegalArgumentException("bucket must not contain whitespaces");
+                throw new ValidationException("bucket must not contain whitespaces");
             }
 
             if (next == '.') {
                 if (prev == -1) {
-                    throw new IllegalArgumentException("bucket must not begin with a period");
+                    throw new ValidationException("bucket must not begin with a period");
                 }
                 if (prev == '.') {
-                    throw new IllegalArgumentException("bucket must not contain two adjacent periods");
+                    throw new ValidationException("bucket must not contain two adjacent periods");
                 }
                 if (prev == '-') {
-                    throw new IllegalArgumentException("bucket must not contain dashes next to periods");
+                    throw new ValidationException("bucket must not contain dashes next to periods");
                 }
             } else {
                 if (next == '-') {
                     if (prev == '.') {
-                        throw new IllegalArgumentException("bucket must not contain dashes next to periods");
+                        throw new ValidationException("bucket must not contain dashes next to periods");
                     }
                     if (prev == -1) {
-                        throw new IllegalArgumentException("bucket must not begin with a '-'");
+                        throw new ValidationException("bucket must not begin with a '-'");
                     }
                 } else {
                     if (!Character.isDigit(next) && !Character.isLetter(next)) {
-                        throw new IllegalArgumentException("bucket must not contain '" + (char) next + "'");
+                        throw new ValidationException("bucket must not contain '" + (char) next + "'");
                     }
                 }
             }
@@ -75,7 +76,7 @@ public class BucketNameValidator {
         }
 
         if (prev == '.' || prev == '-') {
-            throw new IllegalArgumentException("Bucket must not end with '-' or '.'");
+            throw new ValidationException("Bucket must not end with '-' or '.'");
         }
 
         return true;
