@@ -22,7 +22,7 @@ public enum ErrorCodes {
     ),
     INVALID_ACCESS_KEY_ID(
             "InvalidAccessKeyId",
-            "The AWS access key Id you provided does not exist in our records.",
+            "The access key Id you provided does not exist in our records.",
             403
     ),
     INVALID_BUCKET_NAME(
