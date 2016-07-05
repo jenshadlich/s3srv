@@ -1,4 +1,4 @@
-package de.jeha.s3srv.security;
+package de.jeha.s3srv.common.security;
 
 import org.apache.commons.codec.digest.HmacUtils;
 
