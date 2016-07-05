@@ -1,7 +1,7 @@
 package de.jeha.s3srv.storage;
 
-import de.jeha.s3srv.common.S3Bucket;
-import de.jeha.s3srv.common.S3Object;
+import de.jeha.s3srv.model.S3Bucket;
+import de.jeha.s3srv.model.S3Object;
 import de.jeha.s3srv.common.errors.BadDigestException;
 
 import java.io.IOException;

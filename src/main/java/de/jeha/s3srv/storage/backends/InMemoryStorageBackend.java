@@ -1,8 +1,8 @@
 package de.jeha.s3srv.storage.backends;
 
 import de.jeha.s3srv.common.errors.BadDigestException;
-import de.jeha.s3srv.common.S3Bucket;
-import de.jeha.s3srv.common.S3Object;
+import de.jeha.s3srv.model.S3Bucket;
+import de.jeha.s3srv.model.S3Object;
 import de.jeha.s3srv.storage.StorageBackend;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.Hex;

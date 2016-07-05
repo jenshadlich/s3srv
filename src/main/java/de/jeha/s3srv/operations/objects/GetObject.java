@@ -2,7 +2,7 @@ package de.jeha.s3srv.operations.objects;
 
 import com.codahale.metrics.annotation.Timed;
 import de.jeha.s3srv.operations.AbstractOperation;
-import de.jeha.s3srv.common.S3Object;
+import de.jeha.s3srv.model.S3Object;
 import de.jeha.s3srv.storage.StorageBackend;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
