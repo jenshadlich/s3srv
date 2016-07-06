@@ -6,7 +6,7 @@ import java.util.Locale;
 /**
  * @author jenshadlich@googlemail.com
  */
-public class Authorization {
+public class AuthorizationUtils {
 
     public static boolean checkAuthorization(String givenAuthorization, String accessKey, String secretKey,
                                              String httpVerb, String contentMD5, String contentType,
@@ -22,7 +22,7 @@ public class Authorization {
 
         String hmac;
         try {
-            hmac = Signature.calculateHmacSha1(stringToSign, secretKey);
+            hmac = SignatureUtils.calculateHmacSha1(stringToSign, secretKey);
         } catch (SignatureException e) {
             return false;
         }

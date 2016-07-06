@@ -9,7 +9,7 @@ import java.util.Base64;
 /**
  * @author jenshadlich@googlemail.com
  */
-public class Signature {
+public class SignatureUtils {
 
     /**
      * Computes RFC 2104-compliant HMAC signature.

@@ -7,11 +7,11 @@ import static org.junit.Assert.assertTrue;
 /**
  * @author jenshadlich@googlemail.com
  */
-public class AuthorizationTest {
+public class AuthorizationUtilsTest {
 
     @Test
     public void test() {
-        assertTrue(Authorization.checkAuthorization(
+        assertTrue(AuthorizationUtils.checkAuthorization(
                 "AWS foo:opnPRxWyGAkna6soKrR8OhGRfxQ=",
                 "foo",
                 "bar",

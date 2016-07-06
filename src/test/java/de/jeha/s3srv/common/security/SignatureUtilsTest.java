@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * @author jenshadlich@googlemail.com
  */
-public class SignatureTest {
+public class SignatureUtilsTest {
 
     @Test
     public void test() throws SignatureException {
@@ -20,7 +20,7 @@ public class SignatureTest {
                 "Wed, 29 Jun 2016 20:18:33 GMT\n" + // Date
                 "/test-bucket/";                    // CanonicalizedResource, here: request uri
 
-        String hmac = Signature.calculateHmacSha1(stringToSign, secretKey);
+        String hmac = SignatureUtils.calculateHmacSha1(stringToSign, secretKey);
 
         assertEquals("DuOzETffRFZL4izMkgOAdjMfORU=", hmac);
     }
