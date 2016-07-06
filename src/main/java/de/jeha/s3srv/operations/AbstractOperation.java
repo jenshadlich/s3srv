@@ -30,6 +30,7 @@ public abstract class AbstractOperation {
     }
 
     protected Response createErrorResponse(ErrorCodes errorCode, String resource, String requestId) {
+        LOG.info("invalid request: error code {}, status code {}", errorCode.getCode(), errorCode.getStatusCode());
         ErrorResponse error = new ErrorResponse(errorCode.getCode(), errorCode.getDescription(), resource, requestId);
         try {
             String errorResponseXml = JaxbMarshaller.marshall(error);
