@@ -7,10 +7,11 @@ public class AuthorizationContext {
 
     private final String accessKey;
     private final boolean signatureValid;
-    private boolean accessKeyValid = true; // TODO
+    private final boolean accessKeyValid;
 
     public AuthorizationContext(String accessKey, boolean signatureValid) {
         this.accessKey = accessKey;
+        this.accessKeyValid = "foo".equals(accessKey); // TODO
         this.signatureValid = signatureValid;
     }
 
