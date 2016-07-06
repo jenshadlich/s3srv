@@ -37,6 +37,12 @@ public class CreateBucket extends AbstractOperation {
                                  @PathParam("bucket") String bucket) {
         LOG.info("createBucket {}", bucket);
 
+        final String date = headers.getHeaderString("Date");
+        final String authorization = headers.getHeaderString("Authorization");
+
+        LOG.info("Date: {}", date);
+        LOG.info("Authorization: {}", authorization);
+
         try {
             BucketNameValidator.isValid(bucket);
         } catch (ValidationException e) {
