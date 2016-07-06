@@ -8,7 +8,7 @@ import java.util.Locale;
  */
 public class AuthorizationUtils {
 
-    public static boolean checkAuthorization(String givenAuthorization, String accessKey, String secretKey,
+    public static boolean checkAuthorization(String givenAuthorization, Credentials credentials,
                                              String httpVerb, String contentMD5, String contentType,
                                              String date, String resource) {
         final String stringToSign =
@@ -22,12 +22,16 @@ public class AuthorizationUtils {
 
         String hmac;
         try {
-            hmac = SignatureUtils.calculateHmacSha1(stringToSign, secretKey);
+            hmac = SignatureUtils.calculateHmacSha1(stringToSign, credentials.getSecretKey());
         } catch (SignatureException e) {
             return false;
         }
 
-        return givenAuthorization.equals("AWS " + accessKey + ":" + hmac);
+        return givenAuthorization.equals("AWS " + credentials.getAccessKey() + ":" + hmac);
+    }
+
+    public static String extractAccessKey(String authorization) {
+        return null; // TODO
     }
 
 }

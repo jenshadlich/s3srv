@@ -13,8 +13,7 @@ public class AuthorizationUtilsTest {
     public void test() {
         assertTrue(AuthorizationUtils.checkAuthorization(
                 "AWS foo:opnPRxWyGAkna6soKrR8OhGRfxQ=",
-                "foo",
-                "bar",
+                new Credentials("foo", "bar"),
                 "PUT",
                 null,
                 null,
