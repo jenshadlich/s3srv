@@ -1,8 +1,10 @@
 package de.jeha.s3srv.storage.backends;
 
 import de.jeha.s3srv.common.errors.BadDigestException;
+import de.jeha.s3srv.common.security.Credentials;
 import de.jeha.s3srv.model.S3Bucket;
 import de.jeha.s3srv.model.S3Object;
+import de.jeha.s3srv.model.S3User;
 import de.jeha.s3srv.storage.StorageBackend;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.Hex;
@@ -103,6 +105,11 @@ public class InMemoryStorageBackend implements StorageBackend {
 
         objects.remove(objectKey);
         objectContents.remove(objectKey);
+    }
+
+    @Override
+    public S3User getUserByAccessId(String accessKey) {
+        return new S3User("1", new Credentials("foo", "bar")); // TODO
     }
 
     // -----------------------------------------------------------------------------------------------------------------

@@ -3,6 +3,7 @@ package de.jeha.s3srv.storage;
 import de.jeha.s3srv.model.S3Bucket;
 import de.jeha.s3srv.model.S3Object;
 import de.jeha.s3srv.common.errors.BadDigestException;
+import de.jeha.s3srv.model.S3User;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,5 +33,10 @@ public interface StorageBackend {
     S3Object getObject(String bucket, String key);
 
     void deleteObject(String bucket, String key);
+
+    /**
+     * @todo does not really belong to storage backend
+     */
+    S3User getUserByAccessId(String accessKey);
 
 }

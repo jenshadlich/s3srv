@@ -4,7 +4,7 @@ import de.jeha.s3srv.api.ErrorResponse;
 import de.jeha.s3srv.common.errors.ErrorCodes;
 import de.jeha.s3srv.common.security.AuthorizationContext;
 import de.jeha.s3srv.common.security.AuthorizationUtils;
-import de.jeha.s3srv.common.security.Credentials;
+import de.jeha.s3srv.model.S3User;
 import de.jeha.s3srv.storage.StorageBackend;
 import de.jeha.s3srv.xml.JaxbMarshaller;
 import org.slf4j.Logger;
@@ -59,18 +59,20 @@ public abstract class AbstractOperation {
         LOG.info("Date: {}", date);
         LOG.info("Authorization: {}", authorization);
 
-        Credentials credentials = new Credentials("foo", "bar"); // TODO
+        // TODO: exception handling
+        final String accessKey = AuthorizationUtils.extractAccessKey(authorization);
+        S3User user = getStorageBackend().getUserByAccessId(accessKey);
 
         boolean valid = AuthorizationUtils.checkAuthorization(
                 authorization,
-                credentials,
+                user.getCredentials(),
                 request.getMethod(),
                 contentMD5,
                 contentType,
                 date,
                 resource);
 
-        return new AuthorizationContext(credentials.getAccessKey(), valid);
+        return new AuthorizationContext(user.getCredentials().getAccessKey(), valid);
     }
 
 }
