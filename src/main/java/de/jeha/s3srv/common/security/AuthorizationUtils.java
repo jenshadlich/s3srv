@@ -1,5 +1,7 @@
 package de.jeha.s3srv.common.security;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.security.SignatureException;
 import java.util.Locale;
 
@@ -31,7 +33,14 @@ public class AuthorizationUtils {
     }
 
     public static String extractAccessKey(String authorization) {
-        return null; // TODO
+        final String accessKeySigPair = StringUtils.substringAfter(authorization, "AWS ");
+        if (accessKeySigPair != null) {
+            String parts[] = StringUtils.split(accessKeySigPair, ':');
+            if (parts.length == 2) {
+                return parts[0];
+            }
+        }
+        return null;
     }
 
 }
