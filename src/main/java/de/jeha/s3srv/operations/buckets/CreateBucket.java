@@ -67,27 +67,4 @@ public class CreateBucket extends AbstractOperation {
         }
     }
 
-    private AuthorizationContext checkAuthorization(HttpServletRequest request, String resource) {
-        final String date = request.getHeader("Date");
-        final String authorization = request.getHeader("Authorization");
-        final String contentMD5 = request.getHeader("Content-MD5");
-        final String contentType = request.getHeader("Content-Type");
-
-        LOG.info("Date: {}", date);
-        LOG.info("Authorization: {}", authorization);
-
-        Credentials credentials = new Credentials("foo", "bar"); // TODO
-
-        boolean valid = AuthorizationUtils.checkAuthorization(
-                authorization,
-                credentials,
-                request.getMethod(),
-                contentMD5,
-                contentType,
-                date,
-                resource);
-
-        return new AuthorizationContext(credentials.getAccessKey(), valid);
-    }
-
 }
