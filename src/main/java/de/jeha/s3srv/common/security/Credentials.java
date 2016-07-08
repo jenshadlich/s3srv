@@ -29,6 +29,11 @@ public class Credentials {
         return secretKey;
     }
 
+    /**
+     * Generates a random pair of access key and secret key in a pretty naive way.
+     *
+     * @return randomly generated credentials
+     */
     public static Credentials generateRandom() {
         String accessKey = RandomStringUtils.random(ACCESS_KEY_LENGTH, ACCESS_KEY_CHARS);
         String secretKey = RandomStringUtils.random(SECRET_KEY_LENGTH, SECRET_KEY_CHARS);
