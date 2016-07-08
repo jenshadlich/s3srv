@@ -13,6 +13,8 @@ S3-compatible server written in Java.
 
 A lot more ;-)
 
+Test compatibility: https://github.com/ceph/s3-tests
+
 ### Ideas
 
 * different backends
