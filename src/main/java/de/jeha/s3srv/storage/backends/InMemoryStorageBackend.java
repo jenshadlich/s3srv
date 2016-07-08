@@ -109,7 +109,7 @@ public class InMemoryStorageBackend implements StorageBackend {
 
     @Override
     public S3User getUserByAccessId(String accessKey) {
-        return new S3User("1", new Credentials("foo", "bar")); // TODO
+        return new S3User("1", null, new Credentials("foo", "bar")); // TODO
     }
 
     // -----------------------------------------------------------------------------------------------------------------
