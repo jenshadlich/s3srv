@@ -9,11 +9,11 @@ S3-compatible server written in Java.
   * mostly the happy path
   * without any users / keys / access restrictions (but this will come)
 
-## TODO
+## Roadmap
 
-A lot more ;-)
-
-Test compatibility: https://github.com/ceph/s3-tests
+* implement signatures V2
+* implement multipart upload
+* test compatibility: https://github.com/ceph/s3-tests
 
 ### Ideas
 
