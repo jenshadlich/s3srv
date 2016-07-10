@@ -12,6 +12,7 @@ S3-compatible server written in Java.
 ## Roadmap
 
 * implement signatures V2
+  * single user (via config or auto-generated on startup)
 * implement multipart upload
 * test compatibility: https://github.com/ceph/s3-tests
 
