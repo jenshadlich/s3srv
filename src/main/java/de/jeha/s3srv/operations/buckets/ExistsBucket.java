@@ -32,7 +32,7 @@ public class ExistsBucket extends AbstractOperation {
     public Response createBucket(@Context HttpHeaders headers,
                                  @Context HttpServletResponse response,
                                  @PathParam("bucket") String bucket) {
-        LOG.info("existsBucket {}", bucket);
+        LOG.info("existsBucket '{}'", bucket);
 
         if (!getStorageBackend().existsBucket(bucket)) {
             return Response.status(Response.Status.NOT_FOUND)

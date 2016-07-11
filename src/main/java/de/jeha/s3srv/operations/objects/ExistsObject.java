@@ -33,7 +33,7 @@ public class ExistsObject extends AbstractOperation {
                                  @Context HttpServletResponse response,
                                  @PathParam("bucket") String bucket,
                                  @PathParam("key") String key) {
-        LOG.info("existsObject {}/{}", bucket, key);
+        LOG.info("existsObject '{}/{}'", bucket, key);
 
         if (getStorageBackend().existsObject(bucket, key)) {
             return Response.ok()

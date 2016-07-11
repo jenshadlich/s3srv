@@ -32,7 +32,7 @@ public class ListObjects extends AbstractOperation {
     @Path("/{bucket}/")
     @Timed
     public Response listBuckets(@PathParam("bucket") String bucket) {
-        LOG.info("listObjects {}", bucket);
+        LOG.info("listObjects '{}'", bucket);
 
         if (!getStorageBackend().existsBucket(bucket)) {
             return Response.status(Response.Status.NOT_FOUND).build();

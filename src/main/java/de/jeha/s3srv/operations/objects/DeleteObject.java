@@ -33,7 +33,7 @@ public class DeleteObject extends AbstractOperation {
                                  @Context HttpServletResponse response,
                                  @PathParam("bucket") String bucket,
                                  @PathParam("key") String key) {
-        LOG.info("deleteObject {}/{}", bucket, key);
+        LOG.info("deleteObject '{}/{}'", bucket, key);
 
         if (!getStorageBackend().existsObject(bucket, key)) {
             return Response.status(Response.Status.NOT_FOUND)

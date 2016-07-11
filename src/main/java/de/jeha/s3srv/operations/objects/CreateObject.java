@@ -39,7 +39,7 @@ public class CreateObject extends AbstractOperation {
                                  @Context HttpServletResponse response,
                                  @PathParam("bucket") String bucket,
                                  @PathParam("key") String key) {
-        LOG.info("createObject {}/{}", bucket, key);
+        LOG.info("createObject '{}/{}'", bucket, key);
 
         final String expectedMD5 = headers.getHeaderString("Content-MD5");
         try {

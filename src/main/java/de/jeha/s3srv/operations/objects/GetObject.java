@@ -34,7 +34,7 @@ public class GetObject extends AbstractOperation {
                               @Context HttpServletResponse response,
                               @PathParam("bucket") String bucket,
                               @PathParam("key") String key) {
-        LOG.info("getObject {}/{}", bucket, key);
+        LOG.info("getObject '{}/{}'", bucket, key);
 
         if (getStorageBackend().existsObject(bucket, key)) {
             S3Object object = getStorageBackend().getObject(bucket, key);

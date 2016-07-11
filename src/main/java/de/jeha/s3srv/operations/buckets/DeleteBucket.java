@@ -33,7 +33,7 @@ public class DeleteBucket extends AbstractOperation {
     public Response createBucket(@Context HttpHeaders headers,
                                  @Context HttpServletResponse response,
                                  @PathParam("bucket") String bucket) {
-        LOG.info("deleteBucket {}", bucket);
+        LOG.info("deleteBucket '{}'", bucket);
 
         if (!getStorageBackend().existsBucket(bucket)) {
             return Response.status(Response.Status.NOT_FOUND)
