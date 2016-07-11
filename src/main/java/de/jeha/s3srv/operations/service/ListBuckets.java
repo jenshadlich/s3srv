@@ -29,7 +29,6 @@ public class ListBuckets extends AbstractOperation {
     }
 
     @GET
-    @Path("/")
     @Timed
     public Response listBuckets() {
         LOG.info("listBuckets");
