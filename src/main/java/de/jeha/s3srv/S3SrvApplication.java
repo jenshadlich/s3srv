@@ -45,6 +45,11 @@ public class S3SrvApplication extends Application<S3SrvConfiguration> {
 
     @Override
     public void run(S3SrvConfiguration configuration, Environment environment) {
+        System.out.println();
+        System.out.println("accessKey: " + configuration.getAccessKey());
+        System.out.println("secretKey: " + configuration.getSecretKey());
+        System.out.println();
+
         StorageBackend storageBackend = new InMemoryStorageBackend();
 
         // service
