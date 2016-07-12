@@ -1,5 +1,6 @@
 package de.jeha.s3srv;
 
+import de.jeha.s3srv.common.security.Credentials;
 import de.jeha.s3srv.config.S3SrvConfiguration;
 import de.jeha.s3srv.operations.buckets.CreateBucket;
 import de.jeha.s3srv.operations.buckets.DeleteBucket;
@@ -49,8 +50,10 @@ public class S3SrvApplication extends Application<S3SrvConfiguration> {
         System.out.println("accessKey: " + configuration.getAccessKey());
         System.out.println("secretKey: " + configuration.getSecretKey());
         System.out.println();
+        Credentials credentials = new Credentials(configuration.getAccessKey(), configuration.getSecretKey());
 
-        StorageBackend storageBackend = new InMemoryStorageBackend();
+        // storage
+        StorageBackend storageBackend = new InMemoryStorageBackend(credentials);
 
         // service
         environment.jersey().register(new ListBuckets(storageBackend));

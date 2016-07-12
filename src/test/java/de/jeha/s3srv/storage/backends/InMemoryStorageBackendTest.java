@@ -1,6 +1,7 @@
 package de.jeha.s3srv.storage.backends;
 
 import de.jeha.s3srv.common.errors.BadDigestException;
+import de.jeha.s3srv.common.security.Credentials;
 import de.jeha.s3srv.model.S3Object;
 import de.jeha.s3srv.storage.StorageBackend;
 import org.apache.commons.io.IOUtils;
@@ -19,7 +20,7 @@ public class InMemoryStorageBackendTest {
 
     @Test
     public void test() throws IOException, BadDigestException {
-        StorageBackend storageBackend = new InMemoryStorageBackend();
+        StorageBackend storageBackend = new InMemoryStorageBackend(new Credentials("foo", "bar"));
 
         final String content = "content";
         final S3Object object = storageBackend.createObject(

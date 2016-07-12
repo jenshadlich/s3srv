@@ -28,6 +28,11 @@ public class InMemoryStorageBackend implements StorageBackend {
     private final Map<String, S3Bucket> buckets = new HashMap<>();
     private final Map<String, S3Object> objects = new HashMap<>();
     private final Map<String, byte[]> objectContents = new HashMap<>();
+    private final Credentials credentials;
+
+    public InMemoryStorageBackend(Credentials credentials) {
+        this.credentials = credentials;
+    }
 
     @Override
     public void createBucket(String bucket) {
@@ -109,7 +114,10 @@ public class InMemoryStorageBackend implements StorageBackend {
 
     @Override
     public S3User getUserByAccessId(String accessKey) {
-        return new S3User("1", null, new Credentials("foo", "bar")); // TODO
+        if (credentials.getAccessKey().equals(accessKey)) {
+            return new S3User("1", "admin", credentials);
+        }
+        return null;
     }
 
     // -----------------------------------------------------------------------------------------------------------------
