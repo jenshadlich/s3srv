@@ -2,6 +2,7 @@ package de.jeha.s3srv;
 
 import de.jeha.s3srv.common.security.Credentials;
 import de.jeha.s3srv.config.S3SrvConfiguration;
+import de.jeha.s3srv.health.StorageBackendHealthCheck;
 import de.jeha.s3srv.operations.buckets.CreateBucket;
 import de.jeha.s3srv.operations.buckets.DeleteBucket;
 import de.jeha.s3srv.operations.buckets.ExistsBucket;
@@ -54,6 +55,8 @@ public class S3SrvApplication extends Application<S3SrvConfiguration> {
 
         // storage
         StorageBackend storageBackend = new InMemoryStorageBackend(credentials);
+
+        environment.healthChecks().register("StorageBackendHealthCheck", new StorageBackendHealthCheck(storageBackend));
 
         // service
         environment.jersey().register(new ListBuckets(storageBackend));
