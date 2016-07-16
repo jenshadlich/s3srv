@@ -1,5 +1,6 @@
 package de.jeha.s3srv.common.security;
 
+import com.google.common.base.Strings;
 import org.apache.commons.lang3.StringUtils;
 
 import java.security.SignatureException;
@@ -17,8 +18,8 @@ public class AuthorizationUtils {
                 String.format(Locale.US,
                         "%s\n%s\n%s\n%s\n%s",
                         httpVerb,
-                        contentMD5 == null ? "" : contentMD5,
-                        contentType == null ? "" : contentType,
+                        Strings.nullToEmpty(contentMD5),
+                        Strings.nullToEmpty(contentType),
                         date,
                         resource);
 
@@ -36,7 +37,7 @@ public class AuthorizationUtils {
         final String accessKeySigPair = StringUtils.substringAfter(authorization, "AWS ");
         if (accessKeySigPair != null) {
             String parts[] = StringUtils.split(accessKeySigPair, ':');
-            if (parts.length == 2) {
+            if (parts != null && parts.length == 2) {
                 return parts[0];
             }
         }
