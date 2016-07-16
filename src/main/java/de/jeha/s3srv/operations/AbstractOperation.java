@@ -63,7 +63,7 @@ public abstract class AbstractOperation {
         final String accessKey = AuthorizationUtils.extractAccessKey(authorization);
         S3User user = getStorageBackend().getUserByAccessId(accessKey);
 
-        boolean valid = AuthorizationUtils.checkAuthorization(
+        boolean signatureValid = AuthorizationUtils.checkAuthorization(
                 authorization,
                 user.getCredentials(),
                 request.getMethod(),
@@ -72,7 +72,7 @@ public abstract class AbstractOperation {
                 date,
                 resource);
 
-        return new AuthorizationContext(user.getCredentials().getAccessKey(), valid);
+        return new AuthorizationContext(user, signatureValid);
     }
 
 }
