@@ -120,6 +120,11 @@ public class InMemoryStorageBackend implements StorageBackend {
         return null;
     }
 
+    @Override
+    public boolean isHealthy() {
+        return true;
+    }
+
     // -----------------------------------------------------------------------------------------------------------------
 
     private String buildObjectKey(String bucket, String key) {
