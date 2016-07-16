@@ -23,4 +23,8 @@ public class AuthorizationContext {
         return signatureValid;
     }
 
+    public boolean isUserValid() {
+        return user != null;
+    }
+
 }

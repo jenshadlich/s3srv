@@ -4,8 +4,6 @@ import com.codahale.metrics.annotation.Timed;
 import de.jeha.s3srv.common.BucketNameValidator;
 import de.jeha.s3srv.common.errors.ErrorCodes;
 import de.jeha.s3srv.common.security.AuthorizationContext;
-import de.jeha.s3srv.common.security.AuthorizationUtils;
-import de.jeha.s3srv.common.security.Credentials;
 import de.jeha.s3srv.operations.AbstractOperation;
 import de.jeha.s3srv.storage.StorageBackend;
 import org.slf4j.Logger;
@@ -40,7 +38,7 @@ public class CreateBucket extends AbstractOperation {
         final String resource = "/" + bucket + "/";
 
         AuthorizationContext authorizationContext = checkAuthorization(request, resource);
-        if (authorizationContext.getUser() == null) {
+        if (authorizationContext.isUserValid()) {
             return createErrorResponse(ErrorCodes.INVALID_ACCESS_KEY_ID, resource, null);
         }
         if (!authorizationContext.isSignatureValid()) {
