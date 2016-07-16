@@ -76,7 +76,7 @@ public class BucketNameValidator {
         }
 
         if (prev == '.' || prev == '-') {
-            throw new ValidationException("Bucket must not end with '-' or '.'");
+            throw new ValidationException("bucket must not end with '-' or '.'");
         }
 
         return true;
