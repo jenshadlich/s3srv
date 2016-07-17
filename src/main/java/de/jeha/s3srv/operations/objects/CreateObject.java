@@ -3,6 +3,7 @@ package de.jeha.s3srv.operations.objects;
 import com.codahale.metrics.annotation.Timed;
 import de.jeha.s3srv.common.errors.BadDigestException;
 import de.jeha.s3srv.common.errors.ErrorCodes;
+import de.jeha.s3srv.common.http.Headers;
 import de.jeha.s3srv.operations.AbstractOperation;
 import de.jeha.s3srv.model.S3Object;
 import de.jeha.s3srv.storage.StorageBackend;
@@ -41,7 +42,7 @@ public class CreateObject extends AbstractOperation {
                                  @PathParam("key") String key) {
         LOG.info("createObject '{}/{}'", bucket, key);
 
-        final String expectedMD5 = headers.getHeaderString("Content-MD5");
+        final String expectedMD5 = headers.getHeaderString(Headers.CONTENT_MD5);
         try {
             S3Object object = getStorageBackend().createObject(
                     bucket,
@@ -52,7 +53,7 @@ public class CreateObject extends AbstractOperation {
                     request.getContentType());
 
             return Response.ok()
-                    .header("ETag", object.getETag())
+                    .header(Headers.ETAG, object.getETag())
                     .build();
         } catch (IOException e) {
             LOG.error("Unable to read input stream", e);

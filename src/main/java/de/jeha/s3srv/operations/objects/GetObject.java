@@ -1,8 +1,9 @@
 package de.jeha.s3srv.operations.objects;
 
 import com.codahale.metrics.annotation.Timed;
-import de.jeha.s3srv.operations.AbstractOperation;
+import de.jeha.s3srv.common.http.Headers;
 import de.jeha.s3srv.model.S3Object;
+import de.jeha.s3srv.operations.AbstractOperation;
 import de.jeha.s3srv.storage.StorageBackend;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,8 +42,8 @@ public class GetObject extends AbstractOperation {
 
             return Response.ok(object.getInputStream())
                     .type(object.getContentType())
-                    .header("ETag", object.getETag())
-                    .header("Content-Length", Integer.toString(object.getSize()))
+                    .header(Headers.ETAG, object.getETag())
+                    .header(Headers.CONTENT_LENGTH, Integer.toString(object.getSize()))
                     .build();
         } else {
             return Response.status(Response.Status.NOT_FOUND)
