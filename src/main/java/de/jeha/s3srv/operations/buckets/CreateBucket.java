@@ -3,6 +3,7 @@ package de.jeha.s3srv.operations.buckets;
 import com.codahale.metrics.annotation.Timed;
 import de.jeha.s3srv.common.BucketNameValidator;
 import de.jeha.s3srv.common.errors.ErrorCodes;
+import de.jeha.s3srv.common.http.Headers;
 import de.jeha.s3srv.common.security.AuthorizationContext;
 import de.jeha.s3srv.operations.AbstractOperation;
 import de.jeha.s3srv.storage.StorageBackend;
@@ -58,9 +59,9 @@ public class CreateBucket extends AbstractOperation {
             getStorageBackend().createBucket(authorizationContext.getUser(), bucket);
 
             return Response.ok()
-                    .header("Location", "/" + bucket)
-                    .header("Content-Length", "0")
-                    .header("Connection", "close")
+                    .header(Headers.LOCATION, "/" + bucket)
+                    .header(Headers.CONTENT_LENGTH, "0")
+                    .header(Headers.CONNECTION, "close")
                     .build();
         }
     }

@@ -2,6 +2,7 @@ package de.jeha.s3srv.operations;
 
 import de.jeha.s3srv.api.ErrorResponse;
 import de.jeha.s3srv.common.errors.ErrorCodes;
+import de.jeha.s3srv.common.http.Headers;
 import de.jeha.s3srv.common.security.AuthorizationContext;
 import de.jeha.s3srv.common.security.AuthorizationUtils;
 import de.jeha.s3srv.model.S3User;
@@ -51,10 +52,10 @@ public abstract class AbstractOperation {
     }
 
     protected AuthorizationContext checkAuthorization(HttpServletRequest request, String resource) {
-        final String date = request.getHeader("Date");
-        final String authorization = request.getHeader("Authorization");
-        final String contentMD5 = request.getHeader("Content-MD5");
-        final String contentType = request.getHeader("Content-Type");
+        final String date = request.getHeader(Headers.DATE);
+        final String authorization = request.getHeader(Headers.AUTHORIZATION);
+        final String contentMD5 = request.getHeader(Headers.CONTENT_MD5);
+        final String contentType = request.getHeader(Headers.CONTENT_TYPE);
 
         LOG.info("Date: {}", date);
         LOG.info("Authorization: {}", authorization);
