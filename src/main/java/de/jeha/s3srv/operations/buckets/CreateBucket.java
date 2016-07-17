@@ -38,7 +38,7 @@ public class CreateBucket extends AbstractOperation {
         final String resource = "/" + bucket + "/";
 
         AuthorizationContext authorizationContext = checkAuthorization(request, resource);
-        if (authorizationContext.isUserValid()) {
+        if (!authorizationContext.isUserValid()) {
             return createErrorResponse(ErrorCodes.INVALID_ACCESS_KEY_ID, resource, null);
         }
         if (!authorizationContext.isSignatureValid()) {
