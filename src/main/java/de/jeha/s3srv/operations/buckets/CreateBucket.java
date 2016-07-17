@@ -55,7 +55,7 @@ public class CreateBucket extends AbstractOperation {
         if (getStorageBackend().existsBucket(bucket)) {
             return createErrorResponse(ErrorCodes.BUCKET_ALREADY_EXISTS, resource, null);
         } else {
-            getStorageBackend().createBucket(bucket);
+            getStorageBackend().createBucket(authorizationContext.getUser(), bucket);
 
             return Response.ok()
                     .header("Location", "/" + bucket)

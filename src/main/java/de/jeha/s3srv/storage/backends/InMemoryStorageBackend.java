@@ -35,8 +35,8 @@ public class InMemoryStorageBackend implements StorageBackend {
     }
 
     @Override
-    public void createBucket(String bucket) {
-        buckets.put(bucket, new S3Bucket(bucket));
+    public void createBucket(S3User owner, String bucket) {
+        buckets.put(bucket, new S3Bucket(owner, bucket));
     }
 
     @Override

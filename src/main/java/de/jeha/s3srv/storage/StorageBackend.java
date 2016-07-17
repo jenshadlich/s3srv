@@ -16,7 +16,7 @@ public interface StorageBackend extends HealthAware {
 
     List<S3Bucket> listBuckets();
 
-    void createBucket(String bucket);
+    void createBucket(S3User user, String bucket);
 
     boolean existsBucket(String bucket);
 

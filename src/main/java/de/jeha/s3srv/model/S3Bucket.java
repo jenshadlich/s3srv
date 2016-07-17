@@ -7,12 +7,18 @@ import java.time.Instant;
  */
 public class S3Bucket {
 
+    private final S3User owner;
     private final String name;
     private final Instant creationDate;
 
-    public S3Bucket(String name) {
+    public S3Bucket(S3User owner, String name) {
+        this.owner = owner;
         this.name = name;
         this.creationDate = Instant.now();
+    }
+
+    public S3User getOwner() {
+        return owner;
     }
 
     public String getName() {
@@ -22,5 +28,5 @@ public class S3Bucket {
     public Instant getCreationDate() {
         return creationDate;
     }
-    
+
 }
