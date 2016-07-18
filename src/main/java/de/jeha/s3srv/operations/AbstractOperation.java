@@ -62,16 +62,19 @@ public abstract class AbstractOperation {
 
         // TODO: exception handling
         final String accessKey = AuthorizationUtils.extractAccessKey(authorization);
-        S3User user = getStorageBackend().getUserByAccessId(accessKey);
+        final S3User user = getStorageBackend().getUserByAccessId(accessKey);
+        boolean signatureValid = false;
 
-        boolean signatureValid = AuthorizationUtils.checkAuthorization(
-                authorization,
-                user.getCredentials(),
-                request.getMethod(),
-                contentMD5,
-                contentType,
-                date,
-                resource);
+        if (user != null) {
+            signatureValid = AuthorizationUtils.checkAuthorization(
+                    authorization,
+                    user.getCredentials(),
+                    request.getMethod(),
+                    contentMD5,
+                    contentType,
+                    date,
+                    resource);
+        }
 
         return new AuthorizationContext(user, signatureValid);
     }
