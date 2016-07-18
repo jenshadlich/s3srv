@@ -14,15 +14,22 @@ import java.util.Locale;
 public class RFC822Date {
     private static final DateTimeZone GMT = new FixedDateTimeZone("GMT", "GMT", 0, 0);
 
-    private static final DateTimeFormatter DATE_FORMAT =
-            DateTimeFormat.forPattern("EEE, dd MMM yyyy HH:mm:ss 'GMT'")
-                    .withLocale(Locale.US)
-                    .withZone(GMT);
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormat.forPattern("EEE, dd MMM yyyy HH:mm:ss 'GMT'")
+            .withLocale(Locale.US)
+            .withZone(GMT);
 
-    public static Date parse(String date) {
-        return new Date(DATE_FORMAT.parseMillis(date));
+    /**
+     * @param dateString parse the given string
+     * @return Date representation
+     */
+    public static Date parse(String dateString) {
+        return new Date(DATE_FORMAT.parseMillis(dateString));
     }
 
+    /**
+     * @param date the date
+     * @return string representation of the given date
+     */
     public static String format(Date date) {
         return DATE_FORMAT.print(date.getTime());
     }
