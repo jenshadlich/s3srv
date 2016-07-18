@@ -50,6 +50,11 @@ public class InMemoryStorageBackend implements StorageBackend {
     }
 
     @Override
+    public S3Bucket getBucket(String bucket) {
+        return buckets.get(bucket);
+    }
+
+    @Override
     public void deleteBucket(String bucket) {
         buckets.remove(bucket);
     }

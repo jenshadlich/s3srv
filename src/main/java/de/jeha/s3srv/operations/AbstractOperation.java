@@ -60,7 +60,6 @@ public abstract class AbstractOperation {
         LOG.info("Date: {}", date);
         LOG.info("Authorization: {}", authorization);
 
-        // TODO: exception handling
         final String accessKey = AuthorizationUtils.extractAccessKey(authorization);
         final S3User user = getStorageBackend().getUserByAccessId(accessKey);
         boolean signatureValid = false;

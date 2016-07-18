@@ -20,6 +20,8 @@ public interface StorageBackend extends HealthAware {
 
     boolean existsBucket(String bucket);
 
+    S3Bucket getBucket(String bucket);
+
     void deleteBucket(String bucket);
 
     S3Object createObject(String bucket, String key, InputStream contentStream, int contentLength, String expectedMD5,
