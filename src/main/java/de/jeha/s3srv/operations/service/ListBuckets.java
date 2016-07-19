@@ -3,14 +3,17 @@ package de.jeha.s3srv.operations.service;
 import com.codahale.metrics.annotation.Timed;
 import de.jeha.s3srv.api.ListAllMyBucketsResponse;
 import de.jeha.s3srv.common.errors.ErrorCodes;
+import de.jeha.s3srv.common.security.AuthorizationContext;
 import de.jeha.s3srv.operations.AbstractOperation;
 import de.jeha.s3srv.storage.StorageBackend;
 import de.jeha.s3srv.xml.JaxbMarshaller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
@@ -30,17 +33,31 @@ public class ListBuckets extends AbstractOperation {
 
     @GET
     @Timed
-    public Response listBuckets() {
+    public Response listBuckets(@Context HttpServletRequest request) {
         LOG.info("listBuckets");
+        final String resource = "/";
+
+        AuthorizationContext authorizationContext = checkAuthorization(request, resource);
+        if (!authorizationContext.isUserValid()) {
+            return createErrorResponse(ErrorCodes.INVALID_ACCESS_KEY_ID, resource, null);
+        }
+        if (!authorizationContext.isSignatureValid()) {
+            return createErrorResponse(ErrorCodes.SIGNATURE_DOES_NOT_MATCH, resource, null);
+        }
 
         List<ListAllMyBucketsResponse.BucketsEntry> buckets = getStorageBackend()
                 .listBuckets()
                 .stream()
+                .filter(bucket -> bucket.isOwnedBy(authorizationContext.getUser()))
                 .map(bucket -> new ListAllMyBucketsResponse.BucketsEntry(bucket.getName(), bucket.getCreationDate()))
                 .collect(Collectors.toList());
 
         ListAllMyBucketsResponse response =
-                new ListAllMyBucketsResponse(new ListAllMyBucketsResponse.Owner("foo", "bar"), buckets);
+                new ListAllMyBucketsResponse(
+                        new ListAllMyBucketsResponse.Owner(
+                                authorizationContext.getUser().getId(),
+                                authorizationContext.getUser().getDisplayName()),
+                        buckets);
 
         try {
             return Response.ok(JaxbMarshaller.marshall(response), MediaType.APPLICATION_XML_TYPE)
