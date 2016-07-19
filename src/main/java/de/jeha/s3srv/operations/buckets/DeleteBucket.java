@@ -48,13 +48,10 @@ public class DeleteBucket extends AbstractOperation {
             return Response.status(Response.Status.NOT_FOUND)
                     .build();
         }
-
-        S3Bucket bucketObject = getStorageBackend().getBucket(bucket);
-        if (!bucketObject.getOwner().getId().equals(authorizationContext.getUser().getId())) {
+        if (!getStorageBackend().getBucket(bucket).isOwnedBy(authorizationContext.getUser())) {
             return Response.status(Response.Status.UNAUTHORIZED)
                     .build();
         }
-
         if (!getStorageBackend().listObjects(bucket).isEmpty()) {
             return createErrorResponse(ErrorCodes.BUCKET_NOT_EMPTY, "/" + bucket, null);
         }
