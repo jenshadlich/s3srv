@@ -29,4 +29,8 @@ public class S3Bucket {
         return creationDate;
     }
 
+    public boolean isOwnedBy(S3User user) {
+        return owner.getId().equals(user.getId());
+    }
+
 }
