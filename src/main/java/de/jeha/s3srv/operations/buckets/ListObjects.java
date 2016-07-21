@@ -3,15 +3,18 @@ package de.jeha.s3srv.operations.buckets;
 import com.codahale.metrics.annotation.Timed;
 import de.jeha.s3srv.api.ListBucketResult;
 import de.jeha.s3srv.common.errors.ErrorCodes;
+import de.jeha.s3srv.common.security.AuthorizationContext;
 import de.jeha.s3srv.operations.AbstractOperation;
 import de.jeha.s3srv.storage.StorageBackend;
 import de.jeha.s3srv.xml.JaxbMarshaller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
@@ -31,11 +34,23 @@ public class ListObjects extends AbstractOperation {
     @GET
     @Path("/{bucket}/")
     @Timed
-    public Response listBuckets(@PathParam("bucket") String bucket) {
+    public Response listBuckets(@Context HttpServletRequest request,
+                                @PathParam("bucket") String bucket) {
         LOG.info("listObjects '{}'", bucket);
+        final String resource = "/" + bucket + "/";
 
+        AuthorizationContext authorizationContext = checkAuthorization(request, resource);
+        if (!authorizationContext.isUserValid()) {
+            return createErrorResponse(ErrorCodes.INVALID_ACCESS_KEY_ID, resource, null);
+        }
+        if (!authorizationContext.isSignatureValid()) {
+            return createErrorResponse(ErrorCodes.SIGNATURE_DOES_NOT_MATCH, resource, null);
+        }
         if (!getStorageBackend().existsBucket(bucket)) {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return createErrorResponse(ErrorCodes.NO_SUCH_BUCKET, resource, null);
+        }
+        if (!getStorageBackend().getBucket(bucket).isOwnedBy(authorizationContext.getUser())) {
+            return createErrorResponse(ErrorCodes.ACCESS_DENIED, resource, null);
         }
 
         List<ListBucketResult.ContentsEntry> objects = getStorageBackend()
