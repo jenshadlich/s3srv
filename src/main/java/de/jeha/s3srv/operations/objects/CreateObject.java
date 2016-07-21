@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import de.jeha.s3srv.common.errors.BadDigestException;
 import de.jeha.s3srv.common.errors.ErrorCodes;
 import de.jeha.s3srv.common.http.Headers;
+import de.jeha.s3srv.common.security.AuthorizationContext;
 import de.jeha.s3srv.operations.AbstractOperation;
 import de.jeha.s3srv.model.S3Object;
 import de.jeha.s3srv.storage.StorageBackend;
@@ -41,6 +42,21 @@ public class CreateObject extends AbstractOperation {
                                  @PathParam("bucket") String bucket,
                                  @PathParam("key") String key) {
         LOG.info("createObject '{}/{}'", bucket, key);
+        final String resource = "/" + bucket + "/" + key;
+
+        AuthorizationContext authorizationContext = checkAuthorization(request, resource);
+        if (!authorizationContext.isUserValid()) {
+            return createErrorResponse(ErrorCodes.INVALID_ACCESS_KEY_ID, resource, null);
+        }
+        if (!authorizationContext.isSignatureValid()) {
+            return createErrorResponse(ErrorCodes.SIGNATURE_DOES_NOT_MATCH, resource, null);
+        }
+        if (!getStorageBackend().existsBucket(bucket)) {
+            return createErrorResponse(ErrorCodes.NO_SUCH_BUCKET, resource, null);
+        }
+        if (!getStorageBackend().getBucket(bucket).isOwnedBy(authorizationContext.getUser())) {
+            return createErrorResponse(ErrorCodes.ACCESS_DENIED, resource, null);
+        }
 
         final String expectedMD5 = headers.getHeaderString(Headers.CONTENT_MD5);
         try {
