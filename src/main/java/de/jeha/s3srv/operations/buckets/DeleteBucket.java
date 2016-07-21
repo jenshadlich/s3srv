@@ -43,14 +43,11 @@ public class DeleteBucket extends AbstractOperation {
         if (!authorizationContext.isSignatureValid()) {
             return createErrorResponse(ErrorCodes.SIGNATURE_DOES_NOT_MATCH, resource, null);
         }
-
         if (!getStorageBackend().existsBucket(bucket)) {
-            return Response.status(Response.Status.NOT_FOUND)
-                    .build();
+            return createErrorResponse(ErrorCodes.NO_SUCH_BUCKET, resource, null);
         }
         if (!getStorageBackend().getBucket(bucket).isOwnedBy(authorizationContext.getUser())) {
-            return Response.status(Response.Status.UNAUTHORIZED)
-                    .build();
+            return createErrorResponse(ErrorCodes.ACCESS_DENIED, resource, null);
         }
         if (!getStorageBackend().listObjects(bucket).isEmpty()) {
             return createErrorResponse(ErrorCodes.BUCKET_NOT_EMPTY, "/" + bucket, null);
