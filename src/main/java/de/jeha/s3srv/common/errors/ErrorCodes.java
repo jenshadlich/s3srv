@@ -5,6 +5,11 @@ package de.jeha.s3srv.common.errors;
  */
 public enum ErrorCodes {
 
+    ACCESS_DENIED(
+            "AccessDenied",
+            "Access Denied",
+            403
+    ),
     BAD_DIGEST(
             "BadDigest",
             "The Content-MD5 you specified did not match what we received.",
@@ -34,6 +39,11 @@ public enum ErrorCodes {
             "InternalError",
             "We encountered an internal error. Please try again.",
             500
+    ),
+    NO_SUCH_BUCKET(
+            "NoSuchBucket",
+            "The specified bucket does not exist.",
+            404
     ),
     SERVICE_UNAVAILABLE(
             "ServiceUnavailable",
