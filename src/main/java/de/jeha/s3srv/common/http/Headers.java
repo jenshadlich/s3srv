@@ -12,6 +12,7 @@ public class Headers {
     public static String CONTENT_TYPE = "Content-Type";
     public static String DATE = "Date";
     public static String ETAG = "ETag";
+    public static String HOST = "Host";
     public static String LOCATION = "Location";
 
 }
