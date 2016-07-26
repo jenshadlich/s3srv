@@ -56,7 +56,7 @@ public class S3SrvApplication extends Application<S3SrvConfiguration> {
         // storage
         StorageBackend storageBackend = new InMemoryStorageBackend(credentials);
 
-        environment.healthChecks().register("StorageBackendHealthCheck", new StorageBackendHealthCheck(storageBackend));
+        environment.healthChecks().register("StorageBackend", new StorageBackendHealthCheck(storageBackend));
 
         // service
         environment.jersey().register(new ListBuckets(storageBackend));
