@@ -45,25 +45,21 @@ public class CreateBucket extends AbstractOperation {
         if (!authorizationContext.isSignatureValid()) {
             return createErrorResponse(ErrorCodes.SIGNATURE_DOES_NOT_MATCH, resource, null);
         }
-
-        try {
-            BucketNameValidator.isValid(bucket);
-        } catch (ValidationException e) {
-            LOG.info("Invalid bucket name: {}", e.getMessage());
+        if (!BucketNameValidator.isValid(bucket)) {
             return createErrorResponse(ErrorCodes.INVALID_BUCKET_NAME, resource, null);
         }
-
         if (getStorageBackend().existsBucket(bucket)) {
             return createErrorResponse(ErrorCodes.BUCKET_ALREADY_EXISTS, resource, null);
-        } else {
-            getStorageBackend().createBucket(authorizationContext.getUser(), bucket);
-
-            return Response.ok()
-                    .header(Headers.LOCATION, "/" + bucket)
-                    .header(Headers.CONTENT_LENGTH, "0")
-                    .header(Headers.CONNECTION, "close")
-                    .build();
         }
+
+        getStorageBackend().createBucket(authorizationContext.getUser(), bucket);
+
+        return Response.ok()
+                .header(Headers.LOCATION, "/" + bucket)
+                .header(Headers.CONTENT_LENGTH, "0")
+                .header(Headers.CONNECTION, "close")
+                .build();
+
     }
 
 }

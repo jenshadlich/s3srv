@@ -19,20 +19,32 @@ public class BucketNameValidator {
      * @return true if valid
      * @throws ValidationException if not valid
      */
-    public static boolean isValid(String bucket)
+    public static boolean isValid(String bucket) {
+        return isValid(bucket, true);
+    }
+
+    /**
+     * Validate the given bucket name.
+     *
+     * @param bucket    name of bucket
+     * @param exception throw exception if true
+     * @return true if valid
+     * @throws ValidationException if not valid and exception is 'true'
+     */
+    public static boolean isValid(String bucket, boolean exception)
             throws ValidationException {
 
         if (bucket == null) {
-            throw new ValidationException("bucket must not be null");
+            return throwValidationExceptionOrReturnFalse(exception, "bucket must not be null");
         }
 
         if (bucket.length() < MIN_BUCKET_LENGTH || bucket.length() > MAX_BUCKET_LENGTH) {
             final String message = "bucket length must be between " + MIN_BUCKET_LENGTH + " and " + MAX_BUCKET_LENGTH;
-            throw new ValidationException(message);
+            return throwValidationExceptionOrReturnFalse(exception, message);
         }
 
         if (IPV4_PATTERN.matcher(bucket).matches()) {
-            throw new ValidationException("bucket must no be formatted like an IP address");
+            return throwValidationExceptionOrReturnFalse(exception, "bucket must no be formatted like an IP address");
         }
 
         int prev = -1;
@@ -40,34 +52,34 @@ public class BucketNameValidator {
             int next = bucket.charAt(i);
 
             if (Character.isUpperCase(next)) {
-                throw new ValidationException("bucket must not contain uppercase characters");
+                return throwValidationExceptionOrReturnFalse(exception, "bucket must not contain uppercase characters");
             }
 
             if (Character.isWhitespace(next)) {
-                throw new ValidationException("bucket must not contain whitespaces");
+                return throwValidationExceptionOrReturnFalse(exception, "bucket must not contain whitespaces");
             }
 
             if (next == '.') {
                 if (prev == -1) {
-                    throw new ValidationException("bucket must not begin with a period");
+                    return throwValidationExceptionOrReturnFalse(exception, "bucket must not begin with a period");
                 }
                 if (prev == '.') {
-                    throw new ValidationException("bucket must not contain two adjacent periods");
+                    return throwValidationExceptionOrReturnFalse(exception, "bucket must not contain two adjacent periods");
                 }
                 if (prev == '-') {
-                    throw new ValidationException("bucket must not contain dashes next to periods");
+                    return throwValidationExceptionOrReturnFalse(exception, "bucket must not contain dashes next to periods");
                 }
             } else {
                 if (next == '-') {
                     if (prev == '.') {
-                        throw new ValidationException("bucket must not contain dashes next to periods");
+                        return throwValidationExceptionOrReturnFalse(exception, "bucket must not contain dashes next to periods");
                     }
                     if (prev == -1) {
-                        throw new ValidationException("bucket must not begin with a '-'");
+                        return throwValidationExceptionOrReturnFalse(exception, "bucket must not begin with a '-'");
                     }
                 } else {
                     if (!Character.isDigit(next) && !Character.isLetter(next)) {
-                        throw new ValidationException("bucket must not contain '" + (char) next + "'");
+                        return throwValidationExceptionOrReturnFalse(exception, "bucket must not contain '" + (char) next + "'");
                     }
                 }
             }
@@ -76,10 +88,22 @@ public class BucketNameValidator {
         }
 
         if (prev == '.' || prev == '-') {
-            throw new ValidationException("bucket must not end with '-' or '.'");
+            return throwValidationExceptionOrReturnFalse(exception, "bucket must not end with '-' or '.'");
         }
 
         return true;
+    }
+
+    /**
+     * @param exception if true throw a ValidationException with the given message otherwise return false
+     * @param message   the exception message
+     * @return always false
+     */
+    private static boolean throwValidationExceptionOrReturnFalse(boolean exception, String message) {
+        if (exception) {
+            throw new ValidationException(message);
+        }
+        return false;
     }
 
 }
