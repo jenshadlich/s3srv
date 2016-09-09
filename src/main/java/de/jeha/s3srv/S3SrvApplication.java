@@ -3,15 +3,7 @@ package de.jeha.s3srv;
 import de.jeha.s3srv.common.security.Credentials;
 import de.jeha.s3srv.config.S3SrvConfiguration;
 import de.jeha.s3srv.health.StorageBackendHealthCheck;
-import de.jeha.s3srv.operations.buckets.CreateBucket;
-import de.jeha.s3srv.operations.buckets.DeleteBucket;
-import de.jeha.s3srv.operations.buckets.ExistsBucket;
-import de.jeha.s3srv.operations.buckets.ListObjects;
-import de.jeha.s3srv.operations.objects.CreateObject;
-import de.jeha.s3srv.operations.objects.DeleteObject;
-import de.jeha.s3srv.operations.objects.ExistsObject;
-import de.jeha.s3srv.operations.objects.GetObject;
-import de.jeha.s3srv.operations.service.ListBuckets;
+import de.jeha.s3srv.resources.S3OperationsFacade;
 import de.jeha.s3srv.storage.StorageBackend;
 import de.jeha.s3srv.storage.backends.InMemoryStorageBackend;
 import io.dropwizard.Application;
@@ -47,31 +39,15 @@ public class S3SrvApplication extends Application<S3SrvConfiguration> {
 
     @Override
     public void run(S3SrvConfiguration configuration, Environment environment) {
-        System.out.println();
-        System.out.println("accessKey: " + configuration.getAccessKey());
-        System.out.println("secretKey: " + configuration.getSecretKey());
-        System.out.println();
-        Credentials credentials = new Credentials(configuration.getAccessKey(), configuration.getSecretKey());
+        configuration.printCredentials();
+        final Credentials credentials = configuration.buildCredentials();
 
         // storage
-        StorageBackend storageBackend = new InMemoryStorageBackend(credentials);
+        final StorageBackend storageBackend = new InMemoryStorageBackend(credentials);
 
         environment.healthChecks().register("StorageBackend", new StorageBackendHealthCheck(storageBackend));
 
-        // service
-        environment.jersey().register(new ListBuckets(storageBackend));
-
-        // buckets
-        environment.jersey().register(new CreateBucket(storageBackend));
-        environment.jersey().register(new ExistsBucket(storageBackend));
-        environment.jersey().register(new DeleteBucket(storageBackend));
-        environment.jersey().register(new ListObjects(storageBackend));
-
-        // objects
-        environment.jersey().register(new CreateObject(storageBackend));
-        environment.jersey().register(new ExistsObject(storageBackend));
-        environment.jersey().register(new DeleteObject(storageBackend));
-        environment.jersey().register(new GetObject(storageBackend));
+        environment.jersey().register(new S3OperationsFacade(storageBackend));
 
         // print request / response headers
         // printEntity=false because printing consumes the input stream and breaks object creation (PUT Bucket)

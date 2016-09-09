@@ -1,6 +1,5 @@
 package de.jeha.s3srv.operations.buckets;
 
-import com.codahale.metrics.annotation.Timed;
 import de.jeha.s3srv.common.BucketNameValidator;
 import de.jeha.s3srv.common.errors.ErrorCodes;
 import de.jeha.s3srv.common.http.Headers;
@@ -11,17 +10,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.ValidationException;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 /**
  * @author jenshadlich@googlemail.com
  */
-@Path("/")
 public class CreateBucket extends AbstractOperation {
 
     private static final Logger LOG = LoggerFactory.getLogger(CreateBucket.class);
@@ -30,11 +23,8 @@ public class CreateBucket extends AbstractOperation {
         super(storageBackend);
     }
 
-    @PUT
-    @Path("/{bucket}/")
-    @Timed
-    public Response createBucket(@Context HttpServletRequest request,
-                                 @PathParam("bucket") String bucket) {
+    public Response createBucket(HttpServletRequest request,
+                                 String bucket) {
         LOG.info("createBucket '{}'", bucket);
         final String resource = "/" + bucket + "/";
 
@@ -59,7 +49,6 @@ public class CreateBucket extends AbstractOperation {
                 .header(Headers.CONTENT_LENGTH, "0")
                 .header(Headers.CONNECTION, "close")
                 .build();
-
     }
 
 }

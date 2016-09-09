@@ -1,6 +1,5 @@
 package de.jeha.s3srv.operations.service;
 
-import com.codahale.metrics.annotation.Timed;
 import de.jeha.s3srv.api.ListAllMyBucketsResponse;
 import de.jeha.s3srv.common.errors.ErrorCodes;
 import de.jeha.s3srv.common.security.AuthorizationContext;
@@ -11,9 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
@@ -22,7 +18,6 @@ import java.util.stream.Collectors;
 /**
  * @author jenshadlich@googlemail.com
  */
-@Path("/")
 public class ListBuckets extends AbstractOperation {
 
     private static final Logger LOG = LoggerFactory.getLogger(ListBuckets.class);
@@ -31,9 +26,7 @@ public class ListBuckets extends AbstractOperation {
         super(storageBackend);
     }
 
-    @GET
-    @Timed
-    public Response listBuckets(@Context HttpServletRequest request) {
+    public Response listBuckets(HttpServletRequest request) {
         LOG.info("listBuckets");
         final String resource = "/";
 

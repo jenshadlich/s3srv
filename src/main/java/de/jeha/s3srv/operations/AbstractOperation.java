@@ -56,9 +56,11 @@ public abstract class AbstractOperation {
         final String authorization = request.getHeader(Headers.AUTHORIZATION);
         final String contentMD5 = request.getHeader(Headers.CONTENT_MD5);
         final String contentType = request.getHeader(Headers.CONTENT_TYPE);
+        final String host = request.getHeader(Headers.HOST);
 
         LOG.info("Date: {}", date);
         LOG.info("Authorization: {}", authorization);
+        LOG.info("Host: {}", host);
 
         final String accessKey = AuthorizationUtils.extractAccessKey(authorization);
         final S3User user = getStorageBackend().getUserByAccessId(accessKey);
