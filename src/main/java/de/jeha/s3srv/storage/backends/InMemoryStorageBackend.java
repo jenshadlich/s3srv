@@ -10,6 +10,8 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -25,12 +27,15 @@ import java.util.stream.Collectors;
  */
 public class InMemoryStorageBackend implements StorageBackend {
 
+    private static final Logger LOG = LoggerFactory.getLogger(InMemoryStorageBackend.class);
+
     private final Map<String, S3Bucket> buckets = new HashMap<>();
     private final Map<String, S3Object> objects = new HashMap<>();
     private final Map<String, byte[]> objectContents = new HashMap<>();
     private final Credentials credentials;
 
     public InMemoryStorageBackend(Credentials credentials) {
+        LOG.info("Creating in-memory storage backend");
         this.credentials = credentials;
     }
 

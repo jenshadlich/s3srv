@@ -28,3 +28,6 @@ logging:
 
 accessKey: GUSCQ627K6CC4OAL4RGC
 secretKey: eU8cXNzdXGEFpMMa4SSINjlIeD1fea4pMO3dIw9T
+
+storageBackend:
+  type: in-memory

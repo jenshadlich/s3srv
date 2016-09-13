@@ -40,10 +40,9 @@ public class S3SrvApplication extends Application<S3SrvConfiguration> {
     @Override
     public void run(S3SrvConfiguration configuration, Environment environment) {
         configuration.printCredentials();
-        final Credentials credentials = configuration.buildCredentials();
 
-        // storage
-        final StorageBackend storageBackend = new InMemoryStorageBackend(credentials);
+        final Credentials credentials = configuration.buildCredentials();
+        final StorageBackend storageBackend = configuration.getStorageBackend().build(credentials);
 
         environment.healthChecks().register("StorageBackend", new StorageBackendHealthCheck(storageBackend));
 

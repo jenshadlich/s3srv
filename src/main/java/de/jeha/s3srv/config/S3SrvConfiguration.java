@@ -1,10 +1,12 @@
 package de.jeha.s3srv.config;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import de.jeha.s3srv.common.security.Credentials;
 import io.dropwizard.Configuration;
 import org.hibernate.validator.constraints.Length;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -21,6 +23,10 @@ public class S3SrvConfiguration extends Configuration {
     @NotNull
     @Length(min = 40, max = 40)
     private String secretKey;
+
+    @NotNull
+    @Valid
+    private StorageBackendFactory storageBackend;
 
     public String getAccessKey() {
         return accessKey;
@@ -39,6 +45,10 @@ public class S3SrvConfiguration extends Configuration {
 
     public Credentials buildCredentials() {
         return new Credentials(accessKey, secretKey);
+    }
+
+    public StorageBackendFactory getStorageBackend() {
+        return storageBackend;
     }
 
 }
