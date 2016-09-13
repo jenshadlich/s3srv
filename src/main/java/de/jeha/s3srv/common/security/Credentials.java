@@ -41,4 +41,11 @@ public class Credentials {
         return new Credentials(accessKey, secretKey);
     }
 
+    public void print() {
+        System.out.println();
+        System.out.println("accessKey: " + accessKey);
+        System.out.println("secretKey: " + secretKey);
+        System.out.println();
+    }
+
 }

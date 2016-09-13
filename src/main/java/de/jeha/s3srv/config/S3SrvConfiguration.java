@@ -36,13 +36,6 @@ public class S3SrvConfiguration extends Configuration {
         return secretKey;
     }
 
-    public void printCredentials() {
-        System.out.println();
-        System.out.println("accessKey: " + accessKey);
-        System.out.println("secretKey: " + secretKey);
-        System.out.println();
-    }
-
     public Credentials buildCredentials() {
         return new Credentials(accessKey, secretKey);
     }
