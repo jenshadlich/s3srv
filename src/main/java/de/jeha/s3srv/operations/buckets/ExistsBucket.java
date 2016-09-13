@@ -21,6 +21,13 @@ public class ExistsBucket extends AbstractOperation {
         super(storageBackend);
     }
 
+    /**
+     * Check if a bucket exists.
+     *
+     * @param request HTTP request
+     * @param bucket  the bucket to check
+     * @return response
+     */
     public Response existsBucket(HttpServletRequest request,
                                  String bucket) {
         LOG.info("existsBucket '{}'", bucket);

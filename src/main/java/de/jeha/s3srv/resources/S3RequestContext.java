@@ -8,19 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author jenshadlich@googlemail.com
  */
-public class S3Context {
+public class S3RequestContext {
 
     private final boolean pathStyle;
     private final String bucket;
     private final String key;
 
-    private S3Context(boolean pathStyle, String bucket, String key) {
+    private S3RequestContext(boolean pathStyle, String bucket, String key) {
         this.pathStyle = pathStyle;
         this.bucket = bucket;
         this.key = key;
     }
 
-    public static S3Context build(HttpServletRequest request) {
+    public static S3RequestContext build(HttpServletRequest request) {
         final String serverName = request.getServerName();
         final String hostHeader = request.getHeader(Headers.HOST);
         final String requestUri = request.getRequestURI();
@@ -44,7 +44,7 @@ public class S3Context {
                 key = parts[0];
             }
         }
-        return new S3Context(pathStyle, bucket, key);
+        return new S3RequestContext(pathStyle, bucket, key);
     }
 
     public boolean isPathStyle() {

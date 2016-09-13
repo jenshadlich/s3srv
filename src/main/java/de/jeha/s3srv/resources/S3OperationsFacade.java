@@ -39,11 +39,11 @@ public class S3OperationsFacade {
     public Response head(@Context HttpServletRequest request) {
         LOG.info("head");
 
-        final S3Context context = S3Context.build(request);
+        final S3RequestContext context = S3RequestContext.build(request);
         LOG.info("{}", context);
 
         if (context.getBucket() != null && context.getKey() != null) {
-            return new ExistsObject(storageBackend).existsObject(context.getBucket(), context.getKey());
+            return new ExistsObject(storageBackend).existsObject(request, context.getBucket(), context.getKey());
         }
 
         if (context.getBucket() != null) {
@@ -59,11 +59,11 @@ public class S3OperationsFacade {
     public Response get(@Context HttpServletRequest request) {
         LOG.info("get");
 
-        final S3Context context = S3Context.build(request);
+        final S3RequestContext context = S3RequestContext.build(request);
         LOG.info("{}", context);
 
         if (context.getBucket() != null && context.getKey() != null) {
-            return new GetObject(storageBackend).getObject(context.getBucket(), context.getKey());
+            return new GetObject(storageBackend).getObject(request, context.getBucket(), context.getKey());
         }
 
         if (context.getBucket() != null) {
@@ -79,7 +79,7 @@ public class S3OperationsFacade {
     public Response put(@Context HttpServletRequest request) {
         LOG.info("put");
 
-        final S3Context context = S3Context.build(request);
+        final S3RequestContext context = S3RequestContext.build(request);
         LOG.info("{}", context);
 
         if (context.getBucket() != null && context.getKey() != null) {
@@ -99,7 +99,7 @@ public class S3OperationsFacade {
     public Response post(@Context HttpServletRequest request) {
         LOG.info("post");
 
-        final S3Context context = S3Context.build(request);
+        final S3RequestContext context = S3RequestContext.build(request);
         LOG.info("{}", context);
 
         throw new UnsupportedOperationException("Not yet implemented!"); // TODO
@@ -111,7 +111,7 @@ public class S3OperationsFacade {
     public Response delete(@Context HttpServletRequest request) {
         LOG.info("delete");
 
-        final S3Context context = S3Context.build(request);
+        final S3RequestContext context = S3RequestContext.build(request);
         LOG.info("{}", context);
 
         if (context.getBucket() != null && context.getKey() != null) {

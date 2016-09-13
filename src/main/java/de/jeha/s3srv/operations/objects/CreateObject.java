@@ -25,6 +25,14 @@ public class CreateObject extends AbstractOperation {
         super(storageBackend);
     }
 
+    /**
+     * Create an object.
+     *
+     * @param request HTTP request
+     * @param bucket  bucket
+     * @param key     object key
+     * @return response
+     */
     public Response createObject(HttpServletRequest request,
                                  String bucket,
                                  String key) {

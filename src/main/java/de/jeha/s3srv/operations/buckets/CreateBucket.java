@@ -23,6 +23,13 @@ public class CreateBucket extends AbstractOperation {
         super(storageBackend);
     }
 
+    /**
+     * Create a bucket.
+     *
+     * @param request HTTP request
+     * @param bucket  bucket to create
+     * @return response
+     */
     public Response createBucket(HttpServletRequest request,
                                  String bucket) {
         LOG.info("createBucket '{}'", bucket);

@@ -25,6 +25,13 @@ public class ListObjects extends AbstractOperation {
         super(storageBackend);
     }
 
+    /**
+     * List the objects of a given bucket.
+     *
+     * @param request HTTP request
+     * @param bucket  the bucket to list
+     * @return response
+     */
     public Response listBuckets(HttpServletRequest request,
                                 String bucket) {
         LOG.info("listObjects '{}'", bucket);
@@ -64,4 +71,5 @@ public class ListObjects extends AbstractOperation {
             return createErrorResponse(ErrorCodes.INTERNAL_ERROR, "/" + bucket, null);
         }
     }
+
 }

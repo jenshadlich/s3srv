@@ -13,10 +13,11 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <!-- project dependency versions -->
         <slf4j.version>1.7.21</slf4j.version>
-        <junit.version>4.12</junit.version>
         <dropwizard.version>0.9.3</dropwizard.version>
         <commons-io.version>2.5</commons-io.version>
         <commons-codec.version>1.10</commons-codec.version>
+        <junit.version>4.12</junit.version>
+        <mockito-core.version>1.10.19</mockito-core.version>
         <assertj-core.version>3.5.1</assertj-core.version>
         <!-- plugin versions -->
         <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
@@ -61,16 +62,23 @@
             <artifactId>commons-codec</artifactId>
             <version>${commons-codec.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <version>${assertj-core.version}</version>
-        </dependency>
         <!-- test dependencies -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito-core.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj-core.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

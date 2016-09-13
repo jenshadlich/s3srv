@@ -21,6 +21,13 @@ public class DeleteBucket extends AbstractOperation {
         super(storageBackend);
     }
 
+    /**
+     * Delete a bucket
+     *
+     * @param request HTTP request
+     * @param bucket  bucket to delete
+     * @return response
+     */
     public Response deleteBucket(HttpServletRequest request,
                                  String bucket) {
         LOG.info("deleteBucket '{}'", bucket);

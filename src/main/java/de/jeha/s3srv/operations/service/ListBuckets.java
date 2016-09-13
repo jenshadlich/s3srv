@@ -26,6 +26,12 @@ public class ListBuckets extends AbstractOperation {
         super(storageBackend);
     }
 
+    /**
+     * List the buckets of some user
+     *
+     * @param request HTTP request
+     * @return response
+     */
     public Response listBuckets(HttpServletRequest request) {
         LOG.info("listBuckets");
         final String resource = "/";

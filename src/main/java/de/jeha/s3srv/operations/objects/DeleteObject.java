@@ -21,6 +21,14 @@ public class DeleteObject extends AbstractOperation {
         super(storageBackend);
     }
 
+    /**
+     * Delete an object.
+     *
+     * @param request HTTP request
+     * @param bucket  bucket
+     * @param key     object key
+     * @return response
+     */
     public Response deleteObject(HttpServletRequest request,
                                  String bucket,
                                  String key) {
