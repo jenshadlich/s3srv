@@ -21,6 +21,8 @@ import java.util.stream.Collectors;
 public class ListObjects extends AbstractOperation {
     private static final Logger LOG = LoggerFactory.getLogger(ListObjects.class);
 
+    private static final int MAX_OBJECTS_PER_LISTING = 1_000;
+
     public ListObjects(StorageBackend storageBackend) {
         super(storageBackend);
     }
@@ -61,7 +63,7 @@ public class ListObjects extends AbstractOperation {
                         object.getSize()))
                 .collect(Collectors.toList());
 
-        ListBucketResult response = new ListBucketResult(bucket, objects.size(), 1000, objects);
+        ListBucketResult response = new ListBucketResult(bucket, objects.size(), MAX_OBJECTS_PER_LISTING, objects);
 
         try {
             return Response.ok(JaxbMarshaller.marshall(response), MediaType.APPLICATION_XML_TYPE)
