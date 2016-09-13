@@ -29,10 +29,10 @@ public class ExistsObject extends AbstractOperation {
      * @param key    object key
      * @return response
      */
-    public Response existsObject(HttpServletRequest request,
-                                 String bucket,
-                                 String key) {
-        LOG.info("existsObject '{}/{}'", bucket, key);
+    public Response doesObjectExist(HttpServletRequest request,
+                                    String bucket,
+                                    String key) {
+        LOG.info("doesObjectExist '{}/{}'", bucket, key);
         final String resource = "/" + bucket + "/" + key;
 
         AuthorizationContext authorizationContext = checkAuthorization(request, resource);
@@ -45,7 +45,7 @@ public class ExistsObject extends AbstractOperation {
         if (!getStorageBackend().getBucket(bucket).isOwnedBy(authorizationContext.getUser())) {
             return createErrorResponse(ErrorCodes.ACCESS_DENIED, resource, null);
         }
-        if (getStorageBackend().existsObject(bucket, key)) {
+        if (getStorageBackend().doesObjectExist(bucket, key)) {
             return Response.ok()
                     .build();
         } else {

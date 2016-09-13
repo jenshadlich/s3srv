@@ -18,17 +18,17 @@ public interface StorageBackend extends HealthAware {
 
     void createBucket(S3User user, String bucket);
 
-    boolean existsBucket(String bucket);
+    boolean doesBucketExist(String bucket);
 
     S3Bucket getBucket(String bucket);
 
     void deleteBucket(String bucket);
 
-    S3Object createObject(String bucket, String key, InputStream contentStream, int contentLength, String expectedMD5,
-                          String contentType)
+    S3Object createObject(String bucket, String key, InputStream contentStream, int contentLength,
+                          String expectedMD5, String contentType)
             throws IOException, BadDigestException;
 
-    boolean existsObject(String bucket, String key);
+    boolean doesObjectExist(String bucket, String key);
 
     List<S3Object> listObjects(String bucket);
 
@@ -37,7 +37,7 @@ public interface StorageBackend extends HealthAware {
     void deleteObject(String bucket, String key);
 
     /**
-     * @todo does not really belong to storage backend
+     * @todo maybe separate storage backends for data and account data
      */
     S3User getUserByAccessId(String accessKey);
 

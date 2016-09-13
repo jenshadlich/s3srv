@@ -43,11 +43,11 @@ public class S3OperationsFacade {
         LOG.info("{}", context);
 
         if (context.getBucket() != null && context.getKey() != null) {
-            return new ExistsObject(storageBackend).existsObject(request, context.getBucket(), context.getKey());
+            return new ExistsObject(storageBackend).doesObjectExist(request, context.getBucket(), context.getKey());
         }
 
         if (context.getBucket() != null) {
-            return new ExistsBucket(storageBackend).existsBucket(request, context.getBucket());
+            return new ExistsBucket(storageBackend).doesBucketExist(request, context.getBucket());
         }
 
         throw new UnsupportedOperationException("Not yet implemented!"); // TODO

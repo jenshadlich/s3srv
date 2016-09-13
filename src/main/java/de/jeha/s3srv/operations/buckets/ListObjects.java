@@ -44,7 +44,7 @@ public class ListObjects extends AbstractOperation {
         if (!authorizationContext.isSignatureValid()) {
             return createErrorResponse(ErrorCodes.SIGNATURE_DOES_NOT_MATCH, resource, null);
         }
-        if (!getStorageBackend().existsBucket(bucket)) {
+        if (!getStorageBackend().doesBucketExist(bucket)) {
             return createErrorResponse(ErrorCodes.NO_SUCH_BUCKET, resource, null);
         }
         if (!getStorageBackend().getBucket(bucket).isOwnedBy(authorizationContext.getUser())) {

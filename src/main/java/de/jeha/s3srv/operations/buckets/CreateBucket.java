@@ -45,7 +45,7 @@ public class CreateBucket extends AbstractOperation {
         if (!BucketNameValidator.isValid(bucket)) {
             return createErrorResponse(ErrorCodes.INVALID_BUCKET_NAME, resource, null);
         }
-        if (getStorageBackend().existsBucket(bucket)) {
+        if (getStorageBackend().doesBucketExist(bucket)) {
             return createErrorResponse(ErrorCodes.BUCKET_ALREADY_EXISTS, resource, null);
         }
 

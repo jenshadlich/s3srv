@@ -45,7 +45,7 @@ public class DeleteObject extends AbstractOperation {
         if (!getStorageBackend().getBucket(bucket).isOwnedBy(authorizationContext.getUser())) {
             return createErrorResponse(ErrorCodes.ACCESS_DENIED, resource, null);
         }
-        if (!getStorageBackend().existsObject(bucket, key)) {
+        if (!getStorageBackend().doesObjectExist(bucket, key)) {
             return Response.status(Response.Status.NOT_FOUND)
                     .build();
         }

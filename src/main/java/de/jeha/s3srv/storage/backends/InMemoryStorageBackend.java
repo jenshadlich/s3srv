@@ -40,7 +40,7 @@ public class InMemoryStorageBackend implements StorageBackend {
     }
 
     @Override
-    public boolean existsBucket(String bucket) {
+    public boolean doesBucketExist(String bucket) {
         return buckets.containsKey(bucket);
     }
 
@@ -92,7 +92,7 @@ public class InMemoryStorageBackend implements StorageBackend {
     }
 
     @Override
-    public boolean existsObject(String bucket, String key) {
+    public boolean doesObjectExist(String bucket, String key) {
         return objects.containsKey(buildObjectKey(bucket, key));
     }
 

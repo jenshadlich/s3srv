@@ -28,9 +28,9 @@ public class ExistsBucket extends AbstractOperation {
      * @param bucket  the bucket to check
      * @return response
      */
-    public Response existsBucket(HttpServletRequest request,
-                                 String bucket) {
-        LOG.info("existsBucket '{}'", bucket);
+    public Response doesBucketExist(HttpServletRequest request,
+                                    String bucket) {
+        LOG.info("doesBucketExist '{}'", bucket);
         final String resource = "/" + bucket + "/";
 
         AuthorizationContext authorizationContext = checkAuthorization(request, resource);
@@ -40,7 +40,7 @@ public class ExistsBucket extends AbstractOperation {
         if (!authorizationContext.isSignatureValid()) {
             return createErrorResponse(ErrorCodes.SIGNATURE_DOES_NOT_MATCH, resource, null);
         }
-        if (!getStorageBackend().existsBucket(bucket)) {
+        if (!getStorageBackend().doesBucketExist(bucket)) {
             return createErrorResponse(ErrorCodes.NO_SUCH_BUCKET, resource, null);
         }
         if (!getStorageBackend().getBucket(bucket).isOwnedBy(authorizationContext.getUser())) {

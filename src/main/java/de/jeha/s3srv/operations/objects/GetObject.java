@@ -47,7 +47,7 @@ public class GetObject extends AbstractOperation {
         if (!getStorageBackend().getBucket(bucket).isOwnedBy(authorizationContext.getUser())) {
             return createErrorResponse(ErrorCodes.ACCESS_DENIED, resource, null);
         }
-        if (getStorageBackend().existsObject(bucket, key)) {
+        if (getStorageBackend().doesObjectExist(bucket, key)) {
             S3Object object = getStorageBackend().getObject(bucket, key);
 
             return Response.ok(object.getInputStream())
