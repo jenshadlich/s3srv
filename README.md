@@ -5,7 +5,7 @@
 S3-compatible server written in Java.
 
 ## What currently works:
-* create, delete, check for existence and list buckets and objects
+* create, delete, check for existence and list buckets and objects (just 1000)
   * mostly the happy path
   * single user
 * path-style access and virtual hosting (beta)
