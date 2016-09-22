@@ -30,7 +30,7 @@ public class S3RequestContext {
         String bucket = null;
         String key = null;
 
-        String[] parts = StringUtils.split(requestUri, '/');
+        String[] parts = StringUtils.split(requestUri, "/", 2);
         if (pathStyle) {
             if (parts.length >= 1) {
                 bucket = parts[0];
