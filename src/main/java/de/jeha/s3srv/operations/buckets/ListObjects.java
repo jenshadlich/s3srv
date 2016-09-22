@@ -36,7 +36,7 @@ public class ListObjects extends AbstractOperation {
      */
     public Response listBuckets(HttpServletRequest request,
                                 String bucket) {
-        LOG.info("listObjects '{}'", bucket);
+        LOG.info("listBuckets '{}'", bucket);
         final String resource = "/" + bucket + "/";
 
         AuthorizationContext authorizationContext = checkAuthorization(request, resource);
