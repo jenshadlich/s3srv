@@ -2,7 +2,10 @@ package de.jeha.s3srv.xml;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.stream.StreamSource;
 import java.io.IOException;
+import java.io.StringReader;
 import java.io.StringWriter;
 
 /**
@@ -11,6 +14,7 @@ import java.io.StringWriter;
 public class JaxbMarshaller {
 
     private static Marshaller MARSHALLER = null;
+    private static Unmarshaller UNMARSHALLER = null;
 
     static {
         try {
@@ -19,6 +23,11 @@ public class JaxbMarshaller {
             MARSHALLER.setProperty(Marshaller.JAXB_FRAGMENT, true);
         } catch (JAXBException e) {
             throw new RuntimeException("Unable to initialize JAXB Marshaller", e);
+        }
+        try {
+            UNMARSHALLER = JaxbContextHolder.getContext().createUnmarshaller();
+        } catch (JAXBException e) {
+            throw new RuntimeException("Unable to initialize JAXB Unmarshaller", e);
         }
     }
 
@@ -32,4 +41,9 @@ public class JaxbMarshaller {
 
         return stringWriter.toString();
     }
+
+    public static <T> T unmarshall(String xml, Class<T> clazz) throws JAXBException, IOException {
+        return UNMARSHALLER.unmarshal(new StreamSource(new StringReader(xml)), clazz).getValue();
+    }
+
 }
