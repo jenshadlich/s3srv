@@ -31,6 +31,14 @@ public class ListAllMyBucketsResponse {
         buckets.addAll(entries);
     }
 
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public List<BucketsEntry> getBuckets() {
+        return buckets;
+    }
+
     public static class Owner {
 
         @XmlElement(name = "ID")
@@ -39,9 +47,20 @@ public class ListAllMyBucketsResponse {
         @XmlElement(name = "DisplayName")
         private String displayName;
 
+        public Owner() {
+        }
+
         public Owner(String id, String displayName) {
             this.id = id;
             this.displayName = displayName;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public String getDisplayName() {
+            return displayName;
         }
 
     }
