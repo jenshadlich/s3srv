@@ -2,7 +2,7 @@
 
 ![build](https://api.travis-ci.org/jenshadlich/s3srv.svg)
 
-S3-compatible server written in Java.
+S3-compatible server written in Java. The compatiblity is currently limited of course as it's still work in progress :grimacing:
 
 ## What currently works:
 * create, delete, check for existence and list buckets and objects (just 1000)
