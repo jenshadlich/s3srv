@@ -21,11 +21,9 @@ public class S3RequestContext {
     }
 
     public static S3RequestContext build(HttpServletRequest request) {
-        final String serverName = request.getServerName();
-        final String hostHeader = request.getHeader(Headers.HOST);
         final String requestUri = request.getRequestURI();
-
-        final boolean pathStyle = !(hostHeader.startsWith(serverName) && serverName.endsWith(".localhost")); // TODO
+        final String hostHeader = request.getHeader(Headers.HOST);
+        final boolean pathStyle = detectPathStyle(request);
 
         String bucket = null;
         String key = null;
@@ -45,6 +43,13 @@ public class S3RequestContext {
             }
         }
         return new S3RequestContext(pathStyle, bucket, key);
+    }
+
+    private static boolean detectPathStyle(HttpServletRequest request) {
+        final String serverName = request.getServerName();
+        final String hostHeader = request.getHeader(Headers.HOST);
+
+        return !(hostHeader.startsWith(serverName) && serverName.endsWith(".localhost"));
     }
 
     public boolean isPathStyle() {
@@ -67,4 +72,5 @@ public class S3RequestContext {
                 ", key='" + key + '\'' +
                 '}';
     }
+
 }
