@@ -2,6 +2,8 @@ package de.jeha.s3srv.common.security;
 
 import com.google.common.base.Strings;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.security.SignatureException;
 import java.util.Locale;
@@ -10,6 +12,8 @@ import java.util.Locale;
  * @author jenshadlich@googlemail.com
  */
 public class AuthorizationUtils {
+
+    private static final Logger LOG = LoggerFactory.getLogger(AuthorizationUtils.class);
 
     public static boolean checkAuthorization(String givenAuthorization, Credentials credentials,
                                              String httpVerb, String contentMD5, String contentType,
@@ -22,11 +26,14 @@ public class AuthorizationUtils {
                         Strings.nullToEmpty(contentType),
                         date,
                         resource);
+        LOG.debug("String to sign = '{}'", stringToSign);
 
         String hmac;
         try {
             hmac = SignatureUtils.calculateHmacSha1(stringToSign, credentials.getSecretKey());
+            LOG.debug("Calculated HMAC-SHA1 = '{}'", hmac);
         } catch (SignatureException e) {
+            LOG.warn("Could not calculate HMAC-SHA1", e);
             return false;
         }
 
