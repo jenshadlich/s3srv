@@ -12,6 +12,7 @@ import java.util.Locale;
  * @author jenshadlich@googlemail.com
  */
 public class RFC822Date {
+
     private static final DateTimeZone GMT = new FixedDateTimeZone("GMT", "GMT", 0, 0);
 
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormat.forPattern("EEE, dd MMM yyyy HH:mm:ss 'GMT'")
