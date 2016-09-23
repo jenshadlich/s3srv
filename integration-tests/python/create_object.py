@@ -6,7 +6,7 @@ conn = boto.connect_s3(
     aws_access_key_id = access_key,
     aws_secret_access_key = secret_key,
     host = 'localhost',
-    port = 8080,
+    port = 8888,
     is_secure=False,
     calling_format = boto.s3.connection.OrdinaryCallingFormat(),
 )
@@ -15,7 +15,7 @@ bucket = conn.get_bucket('test-bucket')
 from boto.s3.key import Key
 
 key1 = Key(bucket)
-key1.key = 'test-object-1'
+key1.key = 'test/object-1'
 key1.content_type = 'text/plain'
 key1.set_contents_from_string("content 1")
 

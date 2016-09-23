@@ -3,7 +3,7 @@ server:
   maxThreads: 32
   applicationConnectors:
     - type: http
-      port: 8080
+      port: 8888
       maxRequestHeaderSize: 8KiB
       maxResponseHeaderSize: 8KiB
       acceptorThreads: 2
