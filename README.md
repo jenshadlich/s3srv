@@ -14,6 +14,7 @@ S3-compatible server written in Java.
 
 * implement multipart upload
 * test compatibility: https://github.com/ceph/s3-tests
+* support delimiter=%2F&encoding-type=url (commonPrefix)
 
 ### Ideas
 

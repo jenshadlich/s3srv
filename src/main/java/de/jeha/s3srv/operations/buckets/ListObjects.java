@@ -39,6 +39,8 @@ public class ListObjects extends AbstractOperation {
         LOG.info("listBuckets '{}'", bucket);
         final String resource = "/" + bucket + "/";
 
+        // TODO: delimiter=%2F&encoding-type=url (commonPrefix)
+
         AuthorizationContext authorizationContext = checkAuthorization(request, resource);
         if (!authorizationContext.isUserValid()) {
             return createErrorResponse(ErrorCodes.INVALID_ACCESS_KEY_ID, resource, null);
