@@ -15,4 +15,7 @@ public class Headers {
     public static String HOST = "Host";
     public static String LOCATION = "Location";
 
+    // a-amz
+    public static String X_AMZ_ACL = "x-amz-acl";
+
 }
