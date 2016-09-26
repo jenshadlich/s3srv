@@ -1,10 +1,7 @@
 package de.jeha.s3srv.resources;
 
 import com.codahale.metrics.annotation.Timed;
-import de.jeha.s3srv.operations.buckets.CreateBucket;
-import de.jeha.s3srv.operations.buckets.DeleteBucket;
-import de.jeha.s3srv.operations.buckets.ExistsBucket;
-import de.jeha.s3srv.operations.buckets.ListObjects;
+import de.jeha.s3srv.operations.buckets.*;
 import de.jeha.s3srv.operations.objects.CreateObject;
 import de.jeha.s3srv.operations.objects.DeleteObject;
 import de.jeha.s3srv.operations.objects.ExistsObject;
@@ -64,6 +61,10 @@ public class S3OperationsFacade {
 
         if (context.getBucket() != null && context.getKey() != null) {
             return new GetObject(storageBackend).getObject(request, context.getBucket(), context.getKey());
+        }
+
+        if (context.getBucket() != null && "acl".equals(request.getQueryString())) {
+            return new GetBucketACL(storageBackend).getBucketACL(request, context.getBucket());
         }
 
         if (context.getBucket() != null) {
