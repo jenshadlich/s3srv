@@ -39,32 +39,6 @@ public class ListAllMyBucketsResponse {
         return buckets;
     }
 
-    public static class Owner {
-
-        @XmlElement(name = "ID")
-        private String id;
-
-        @XmlElement(name = "DisplayName")
-        private String displayName;
-
-        public Owner() {
-        }
-
-        public Owner(String id, String displayName) {
-            this.id = id;
-            this.displayName = displayName;
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public String getDisplayName() {
-            return displayName;
-        }
-
-    }
-
     public static class BucketsEntry {
 
         @XmlElement(name = "Name")

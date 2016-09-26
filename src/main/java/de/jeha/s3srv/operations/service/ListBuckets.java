@@ -1,6 +1,7 @@
 package de.jeha.s3srv.operations.service;
 
 import de.jeha.s3srv.api.ListAllMyBucketsResponse;
+import de.jeha.s3srv.api.Owner;
 import de.jeha.s3srv.common.errors.ErrorCodes;
 import de.jeha.s3srv.common.security.AuthorizationContext;
 import de.jeha.s3srv.operations.AbstractOperation;
@@ -53,7 +54,7 @@ public class ListBuckets extends AbstractOperation {
 
         ListAllMyBucketsResponse response =
                 new ListAllMyBucketsResponse(
-                        new ListAllMyBucketsResponse.Owner(
+                        new Owner(
                                 authorizationContext.getUser().getId(),
                                 authorizationContext.getUser().getDisplayName()),
                         buckets);

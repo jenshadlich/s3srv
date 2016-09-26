@@ -18,7 +18,7 @@ public class ListAllMyBucketsResponseSerializationTest {
     @Test
     public void test() throws JAXBException, IOException {
         ListAllMyBucketsResponse response = new ListAllMyBucketsResponse(
-                new ListAllMyBucketsResponse.Owner("foo", "bar"),
+                new Owner("foo", "bar"),
                 Collections.singletonList(new ListAllMyBucketsResponse.BucketsEntry(
                         "test",
                         Instant.parse("2006-02-03T16:45:09.001Z"))));
