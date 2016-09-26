@@ -1,5 +1,6 @@
 package de.jeha.s3srv.xml;
 
+import de.jeha.s3srv.api.AccessControlPolicy;
 import de.jeha.s3srv.api.ErrorResponse;
 import de.jeha.s3srv.api.ListAllMyBucketsResponse;
 import de.jeha.s3srv.api.ListBucketResult;
@@ -17,6 +18,7 @@ class JaxbContextHolder {
     static {
         try {
             JAXB_CONTEXT = JAXBContext.newInstance(
+                    AccessControlPolicy.class,
                     ErrorResponse.class,
                     ListAllMyBucketsResponse.class,
                     ListBucketResult.class
