@@ -18,14 +18,26 @@ public class ListBucketResult {
     @XmlElement(name = "Name")
     private String name;
 
+    @XmlElement(name = "Prefix")
+    private String prefix;
+
     @XmlElement(name = "KeyCount")
     private Integer keyCount;
 
     @XmlElement(name = "MaxKeys")
     private Integer maxKeys;
 
+    @XmlElement(name = "Delimiter")
+    private String delimiter;
+
+    @XmlElement(name = "IsTruncated")
+    private Boolean isTruncated = Boolean.FALSE;
+
     @XmlElement(name = "Contents")
     private List<ContentsEntry> objects = new ArrayList<>();
+
+    @XmlElement(name = "CommonPrefixes")
+    private List<CommonPrefix> commonPrefixes = new ArrayList<>();
 
     public ListBucketResult() {
     }
@@ -37,9 +49,18 @@ public class ListBucketResult {
         this.objects = objects;
     }
 
+    public ListBucketResult(String name, Integer keyCount, Integer maxKeys, List<ContentsEntry> objects, List<CommonPrefix> commonPrefixes) {
+        this.name = name;
+        this.keyCount = keyCount;
+        this.maxKeys = maxKeys;
+        this.objects = objects;
+        this.commonPrefixes = commonPrefixes;
+    }
+
     public static class ContentsEntry {
 
         private static final String STORAGE_CLASS_STANDARD = "STANDARD";
+        private static final String STORAGE_CLASS_REDUCED_REDUNDANCY = "REDUCED_REDUNDANCY";
 
         @XmlElement(name = "Key")
         private String key;
@@ -65,4 +86,13 @@ public class ListBucketResult {
         }
     }
 
+    public static class CommonPrefix {
+
+        @XmlElement(name = "Prefix")
+        private String prefix;
+
+        public CommonPrefix(String prefix) {
+            this.prefix = prefix;
+        }
+    }
 }
