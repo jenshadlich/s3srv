@@ -1,7 +1,9 @@
 package de.jeha.s3srv.operations.objects;
 
 import de.jeha.s3srv.common.errors.ErrorCodes;
+import de.jeha.s3srv.common.http.Headers;
 import de.jeha.s3srv.common.security.AuthorizationContext;
+import de.jeha.s3srv.model.S3Object;
 import de.jeha.s3srv.operations.AbstractOperation;
 import de.jeha.s3srv.storage.StorageBackend;
 import org.slf4j.Logger;
@@ -46,7 +48,12 @@ public class ExistsObject extends AbstractOperation {
             return createErrorResponse(ErrorCodes.ACCESS_DENIED, resource, null);
         }
         if (getStorageBackend().doesObjectExist(bucket, key)) {
+            S3Object object = getStorageBackend().getObject(bucket, key);
+
             return Response.ok()
+                    .type(object.getContentType())
+                    .header(Headers.ETAG, object.getETag())
+                    .header(Headers.CONTENT_LENGTH, Integer.toString(object.getSize()))
                     .build();
         } else {
             return Response.status(Response.Status.NOT_FOUND)
