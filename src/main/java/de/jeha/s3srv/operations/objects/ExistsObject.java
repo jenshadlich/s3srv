@@ -1,5 +1,6 @@
 package de.jeha.s3srv.operations.objects;
 
+import de.jeha.s3srv.common.RFC822Date;
 import de.jeha.s3srv.common.errors.ErrorCodes;
 import de.jeha.s3srv.common.http.Headers;
 import de.jeha.s3srv.common.security.AuthorizationContext;
@@ -52,6 +53,7 @@ public class ExistsObject extends AbstractOperation {
 
             return Response.ok()
                     .type(object.getContentType())
+                    .header(Headers.LAST_MODIFIED, RFC822Date.format(object.getLastModified()))
                     .header(Headers.ETAG, object.getETag())
                     .header(Headers.CONTENT_LENGTH, Integer.toString(object.getSize()))
                     .build();

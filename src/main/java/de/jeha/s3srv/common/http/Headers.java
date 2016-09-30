@@ -13,6 +13,7 @@ public class Headers {
     public static String DATE = "Date";
     public static String ETAG = "ETag";
     public static String HOST = "Host";
+    public static String LAST_MODIFIED = "Last-Modified";
     public static String LOCATION = "Location";
 
     // a-amz

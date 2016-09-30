@@ -5,6 +5,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.tz.FixedDateTimeZone;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.Locale;
 
@@ -33,6 +34,14 @@ public class RFC822Date {
      */
     public static String format(Date date) {
         return DATE_FORMAT.print(date.getTime());
+    }
+
+    /**
+     * @param instant the instant
+     * @return string representation of the given instant
+     */
+    public static String format(Instant instant) {
+        return DATE_FORMAT.print(Date.from(instant).getTime());
     }
 
 }
