@@ -34,12 +34,13 @@ public class ListObjects extends AbstractOperation {
      * @param bucket  the bucket to list
      * @return response
      */
-    public Response listBuckets(HttpServletRequest request,
+    public Response listObjects(HttpServletRequest request,
                                 String bucket) {
-        LOG.info("listBuckets '{}'", bucket);
+        LOG.info("listObjects '{}'", bucket);
         final String resource = "/" + bucket + "/";
 
         // TODO: delimiter=%2F&encoding-type=url (commonPrefix)
+        // TODO: ?delimiter=%2F&max-keys=10&encoding-type=url
 
         AuthorizationContext authorizationContext = checkAuthorization(request, resource);
         if (!authorizationContext.isUserValid()) {

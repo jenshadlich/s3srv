@@ -68,7 +68,7 @@ public class S3OperationsFacade {
         }
 
         if (context.getBucket() != null) {
-            return new ListObjects(storageBackend).listBuckets(request, context.getBucket());
+            return new ListObjects(storageBackend).listObjects(request, context.getBucket());
         }
 
         return new ListBuckets(storageBackend).listBuckets(request);
