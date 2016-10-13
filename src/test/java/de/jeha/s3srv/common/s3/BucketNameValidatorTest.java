@@ -22,11 +22,13 @@ public class BucketNameValidatorTest {
     }
 
     @Test
-    public void testInvalidNames() {
-        // too short
+    public void testInvalidNamesThatAreTooShort() {
         assertThatThrownBy(() -> BucketNameValidator.isValid("b")).isInstanceOf(ValidationException.class);
         assertThatThrownBy(() -> BucketNameValidator.isValid("bu")).isInstanceOf(ValidationException.class);
+    }
 
+    @Test
+    public void testInvalidNames() {
         assertThatThrownBy(() -> BucketNameValidator.isValid(null)).isInstanceOf(ValidationException.class);
         assertThatThrownBy(() -> BucketNameValidator.isValid("MyBucket")).isInstanceOf(ValidationException.class);
         assertThatThrownBy(() -> BucketNameValidator.isValid("192.168.5.4")).isInstanceOf(ValidationException.class);
