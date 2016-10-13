@@ -46,7 +46,7 @@ public class DeleteBucket extends AbstractOperation {
         if (!getStorageBackend().getBucket(bucket).isOwnedBy(authorizationContext.getUser())) {
             return createErrorResponse(ErrorCodes.ACCESS_DENIED, resource, null);
         }
-        if (!getStorageBackend().listObjects(bucket).isEmpty()) {
+        if (!getStorageBackend().listObjects(bucket, 1).isEmpty()) {
             return createErrorResponse(ErrorCodes.BUCKET_NOT_EMPTY, "/" + bucket, null);
         }
 
