@@ -30,7 +30,7 @@ public interface StorageBackend extends HealthAware {
 
     boolean doesObjectExist(String bucket, String key);
 
-    List<S3Object> listObjects(String bucket);
+    List<S3Object> listObjects(String bucket, int max);
 
     S3Object getObject(String bucket, String key);
 

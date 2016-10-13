@@ -102,10 +102,11 @@ public class InMemoryStorageBackend implements StorageBackend {
     }
 
     @Override
-    public List<S3Object> listObjects(String bucket) {
+    public List<S3Object> listObjects(String bucket, int max) {
         return objects.values()
                 .stream()
                 .filter(value -> value.getBucket().getName().equals(bucket))
+                .limit(max)
                 .collect(Collectors.toList());
     }
 

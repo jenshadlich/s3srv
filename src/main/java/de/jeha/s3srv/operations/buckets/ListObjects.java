@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 public class ListObjects extends AbstractOperation {
     private static final Logger LOG = LoggerFactory.getLogger(ListObjects.class);
 
-    private static final int MAX_OBJECTS_PER_LISTING = 1_000;
+    private static final int DEFAULT_MAX_KEYS = 1_000;
 
     public ListObjects(StorageBackend storageBackend) {
         super(storageBackend);
@@ -39,7 +39,6 @@ public class ListObjects extends AbstractOperation {
         LOG.info("listObjects '{}'", bucket);
         final String resource = "/" + bucket + "/";
 
-        // TODO: delimiter=%2F&encoding-type=url (commonPrefix)
         // TODO: ?delimiter=%2F&max-keys=10&encoding-type=url
 
         AuthorizationContext authorizationContext = checkAuthorization(request, resource);
@@ -56,8 +55,10 @@ public class ListObjects extends AbstractOperation {
             return createErrorResponse(ErrorCodes.ACCESS_DENIED, resource, null);
         }
 
+        int maxKeys = DEFAULT_MAX_KEYS;
+
         List<ListBucketResult.ContentsEntry> objects = getStorageBackend()
-                .listObjects(bucket)
+                .listObjects(bucket, maxKeys)
                 .stream()
                 .map(object -> new ListBucketResult.ContentsEntry(
                         object.getKey(),
@@ -66,7 +67,7 @@ public class ListObjects extends AbstractOperation {
                         object.getSize()))
                 .collect(Collectors.toList());
 
-        ListBucketResult response = new ListBucketResult(bucket, objects.size(), MAX_OBJECTS_PER_LISTING, objects);
+        ListBucketResult response = new ListBucketResult(bucket, objects.size(), maxKeys, objects);
 
         try {
             return Response.ok(JaxbMarshaller.marshall(response), MediaType.APPLICATION_XML_TYPE)
