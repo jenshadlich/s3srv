@@ -1,7 +1,7 @@
-package de.jeha.s3srv.operations;
+package de.jeha.s3srv.common.s3;
 
 import de.jeha.s3srv.common.http.Headers;
-import de.jeha.s3srv.resources.S3RequestContext;
+import de.jeha.s3srv.common.s3.RequestContext;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -14,7 +14,7 @@ import static org.mockito.Mockito.when;
 /**
  * @author jenshadlich@googlemail.com
  */
-public class S3RequestContextTest {
+public class RequestContextTest {
 
     @Test
     public void test() {
@@ -23,7 +23,7 @@ public class S3RequestContextTest {
         when(mockedRequest.getHeader(Headers.HOST)).thenReturn("");
         when(mockedRequest.getRequestURI()).thenReturn("/test-bucket/test/object");
 
-        S3RequestContext context = S3RequestContext.build(mockedRequest);
+        RequestContext context = RequestContext.build(mockedRequest);
         assertTrue(context.isPathStyle());
         assertEquals("test-bucket", context.getBucket());
         assertEquals("test/object", context.getKey());

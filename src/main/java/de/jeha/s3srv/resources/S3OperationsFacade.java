@@ -1,6 +1,7 @@
 package de.jeha.s3srv.resources;
 
 import com.codahale.metrics.annotation.Timed;
+import de.jeha.s3srv.common.s3.RequestContext;
 import de.jeha.s3srv.operations.buckets.*;
 import de.jeha.s3srv.operations.objects.CreateObject;
 import de.jeha.s3srv.operations.objects.DeleteObject;
@@ -36,7 +37,7 @@ public class S3OperationsFacade {
     public Response head(@Context HttpServletRequest request) {
         LOG.info("head");
 
-        final S3RequestContext context = S3RequestContext.build(request);
+        final RequestContext context = RequestContext.build(request);
         LOG.info("{}", context);
 
         if (context.getBucket() != null && context.getKey() != null) {
@@ -56,7 +57,7 @@ public class S3OperationsFacade {
     public Response get(@Context HttpServletRequest request) {
         LOG.info("get");
 
-        final S3RequestContext context = S3RequestContext.build(request);
+        final RequestContext context = RequestContext.build(request);
         LOG.info("{}", context);
 
         if (context.getBucket() != null && context.getKey() != null) {
@@ -80,7 +81,7 @@ public class S3OperationsFacade {
     public Response put(@Context HttpServletRequest request) {
         LOG.info("put");
 
-        final S3RequestContext context = S3RequestContext.build(request);
+        final RequestContext context = RequestContext.build(request);
         LOG.info("{}", context);
 
         if (context.getBucket() != null && context.getKey() != null) {
@@ -100,7 +101,7 @@ public class S3OperationsFacade {
     public Response post(@Context HttpServletRequest request) {
         LOG.info("post");
 
-        final S3RequestContext context = S3RequestContext.build(request);
+        final RequestContext context = RequestContext.build(request);
         LOG.info("{}", context);
 
         throw new UnsupportedOperationException("Not yet implemented!"); // TODO
@@ -112,7 +113,7 @@ public class S3OperationsFacade {
     public Response delete(@Context HttpServletRequest request) {
         LOG.info("delete");
 
-        final S3RequestContext context = S3RequestContext.build(request);
+        final RequestContext context = RequestContext.build(request);
         LOG.info("{}", context);
 
         if (context.getBucket() != null && context.getKey() != null) {

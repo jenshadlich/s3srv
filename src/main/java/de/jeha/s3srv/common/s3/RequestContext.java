@@ -1,4 +1,4 @@
-package de.jeha.s3srv.resources;
+package de.jeha.s3srv.common.s3;
 
 import de.jeha.s3srv.common.http.Headers;
 import org.apache.commons.lang3.StringUtils;
@@ -8,19 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author jenshadlich@googlemail.com
  */
-public class S3RequestContext {
+public class RequestContext {
 
     private final boolean pathStyle;
     private final String bucket;
     private final String key;
 
-    private S3RequestContext(boolean pathStyle, String bucket, String key) {
+    private RequestContext(boolean pathStyle, String bucket, String key) {
         this.pathStyle = pathStyle;
         this.bucket = bucket;
         this.key = key;
     }
 
-    public static S3RequestContext build(HttpServletRequest request) {
+    public static RequestContext build(HttpServletRequest request) {
         final String requestUri = request.getRequestURI();
         final String hostHeader = request.getHeader(Headers.HOST);
         final boolean pathStyle = detectPathStyle(request);
@@ -42,7 +42,7 @@ public class S3RequestContext {
                 key = parts[0];
             }
         }
-        return new S3RequestContext(pathStyle, bucket, key);
+        return new RequestContext(pathStyle, bucket, key);
     }
 
     private static boolean detectPathStyle(HttpServletRequest request) {

@@ -1,6 +1,6 @@
 package de.jeha.s3srv.operations.buckets;
 
-import de.jeha.s3srv.common.BucketNameValidator;
+import de.jeha.s3srv.common.s3.BucketNameValidator;
 import de.jeha.s3srv.common.errors.ErrorCodes;
 import de.jeha.s3srv.common.http.Headers;
 import de.jeha.s3srv.common.security.AuthorizationContext;

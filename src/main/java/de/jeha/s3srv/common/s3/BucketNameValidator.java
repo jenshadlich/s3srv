@@ -1,4 +1,4 @@
-package de.jeha.s3srv.common;
+package de.jeha.s3srv.common.s3;
 
 import javax.validation.ValidationException;
 import java.util.regex.Pattern;

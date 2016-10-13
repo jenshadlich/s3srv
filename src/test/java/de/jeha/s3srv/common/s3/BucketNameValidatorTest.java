@@ -1,4 +1,4 @@
-package de.jeha.s3srv.common;
+package de.jeha.s3srv.common.s3;
 
 import org.junit.Test;
 
