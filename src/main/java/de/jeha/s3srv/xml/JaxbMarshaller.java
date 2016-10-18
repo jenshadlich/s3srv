@@ -31,7 +31,7 @@ public class JaxbMarshaller {
         }
     }
 
-    public static String marshall(Object object) throws JAXBException, IOException {
+    public synchronized static String marshall(Object object) throws JAXBException, IOException {
         StringWriter stringWriter = new StringWriter();
         stringWriter.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
         stringWriter.append("\n");
@@ -42,7 +42,7 @@ public class JaxbMarshaller {
         return stringWriter.toString();
     }
 
-    public static <T> T unmarshall(String xml, Class<T> clazz) throws JAXBException, IOException {
+    public synchronized static <T> T unmarshall(String xml, Class<T> clazz) throws JAXBException, IOException {
         return UNMARSHALLER.unmarshal(new StreamSource(new StringReader(xml)), clazz).getValue();
     }
 
