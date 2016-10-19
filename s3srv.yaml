@@ -1,16 +1,16 @@
 server:
   type: default
-  maxThreads: 32
+  maxThreads: 256
   applicationConnectors:
     - type: http
       port: 8888
       maxRequestHeaderSize: 8KiB
       maxResponseHeaderSize: 8KiB
-      acceptorThreads: 2
-      selectorThreads: 2
+      acceptorThreads: 4
+      selectorThreads: 4
   adminConnectors:
     - type: http
-      port: 8081
+      port: 8889
   gzip:
     enabled: true
     bufferSize: 32KiB
