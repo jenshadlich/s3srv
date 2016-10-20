@@ -2,7 +2,7 @@ package de.jeha.s3srv.xml;
 
 import de.jeha.s3srv.api.AccessControlPolicy;
 import de.jeha.s3srv.api.ErrorResponse;
-import de.jeha.s3srv.api.ListAllMyBucketsResponse;
+import de.jeha.s3srv.api.ListAllMyBucketsResult;
 import de.jeha.s3srv.api.ListBucketResult;
 
 import javax.xml.bind.JAXBContext;
@@ -20,7 +20,7 @@ class JaxbContextHolder {
             JAXB_CONTEXT = JAXBContext.newInstance(
                     AccessControlPolicy.class,
                     ErrorResponse.class,
-                    ListAllMyBucketsResponse.class,
+                    ListAllMyBucketsResult.class,
                     ListBucketResult.class
             );
         } catch (JAXBException e) {

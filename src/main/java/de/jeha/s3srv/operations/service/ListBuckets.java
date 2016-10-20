@@ -1,6 +1,6 @@
 package de.jeha.s3srv.operations.service;
 
-import de.jeha.s3srv.api.ListAllMyBucketsResponse;
+import de.jeha.s3srv.api.ListAllMyBucketsResult;
 import de.jeha.s3srv.api.Owner;
 import de.jeha.s3srv.common.errors.ErrorCodes;
 import de.jeha.s3srv.common.security.AuthorizationContext;
@@ -45,15 +45,15 @@ public class ListBuckets extends AbstractOperation {
             return createErrorResponse(ErrorCodes.SIGNATURE_DOES_NOT_MATCH, resource, null);
         }
 
-        List<ListAllMyBucketsResponse.BucketsEntry> buckets = getStorageBackend()
+        List<ListAllMyBucketsResult.BucketsEntry> buckets = getStorageBackend()
                 .listBuckets()
                 .stream()
                 .filter(bucket -> bucket.isOwnedBy(authorizationContext.getUser()))
-                .map(bucket -> new ListAllMyBucketsResponse.BucketsEntry(bucket.getName(), bucket.getCreationDate()))
+                .map(bucket -> new ListAllMyBucketsResult.BucketsEntry(bucket.getName(), bucket.getCreationDate()))
                 .collect(Collectors.toList());
 
-        ListAllMyBucketsResponse response =
-                new ListAllMyBucketsResponse(
+        ListAllMyBucketsResult response =
+                new ListAllMyBucketsResult(
                         new Owner(
                                 authorizationContext.getUser().getId(),
                                 authorizationContext.getUser().getDisplayName()),

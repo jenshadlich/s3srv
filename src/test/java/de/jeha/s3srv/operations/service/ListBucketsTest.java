@@ -1,6 +1,6 @@
 package de.jeha.s3srv.operations.service;
 
-import de.jeha.s3srv.api.ListAllMyBucketsResponse;
+import de.jeha.s3srv.api.ListAllMyBucketsResult;
 import de.jeha.s3srv.common.http.Headers;
 import de.jeha.s3srv.common.security.Credentials;
 import de.jeha.s3srv.model.S3User;
@@ -38,8 +38,8 @@ public class ListBucketsTest {
         verify(mockedStorageBackend, times(1)).listBuckets();
         assertEquals(200, response.getStatus());
 
-        ListAllMyBucketsResponse responseEntity =
-                JaxbMarshaller.unmarshall((String) response.getEntity(), ListAllMyBucketsResponse.class);
+        ListAllMyBucketsResult responseEntity =
+                JaxbMarshaller.unmarshall((String) response.getEntity(), ListAllMyBucketsResult.class);
         assertEquals("1", responseEntity.getOwner().getId());
         assertEquals("foo", responseEntity.getOwner().getDisplayName());
         assertEquals(0, responseEntity.getBuckets().size());

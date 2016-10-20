@@ -13,8 +13,8 @@ import java.util.List;
 /**
  * @author jenshadlich@googlemail.com
  */
-@XmlRootElement(name = "ListAllMyBucketsResponse")
-public class ListAllMyBucketsResponse {
+@XmlRootElement(name = "ListAllMyBucketsResult")
+public class ListAllMyBucketsResult {
 
     @XmlElement(name = "Owner")
     private Owner owner;
@@ -23,10 +23,10 @@ public class ListAllMyBucketsResponse {
     @XmlElement(name = "Bucket")
     private List<BucketsEntry> buckets = new ArrayList<>();
 
-    public ListAllMyBucketsResponse() {
+    public ListAllMyBucketsResult() {
     }
 
-    public ListAllMyBucketsResponse(Owner owner, List<BucketsEntry> entries) {
+    public ListAllMyBucketsResult(Owner owner, List<BucketsEntry> entries) {
         this.owner = owner;
         buckets.addAll(entries);
     }
