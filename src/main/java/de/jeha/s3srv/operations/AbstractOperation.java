@@ -62,6 +62,10 @@ public abstract class AbstractOperation {
         LOG.info("Authorization: {}", authorization);
         LOG.info("Host: {}", host);
 
+        if (authorization == null) {
+            return new AuthorizationContext(new S3User("anonymous", "", null), true);
+        }
+
         final String accessKey = AuthorizationUtils.extractAccessKey(authorization);
         final S3User user = getStorageBackend().getUserByAccessId(accessKey);
         boolean signatureValid = false;
