@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.Response;
 
+import static de.jeha.s3srv.common.errors.ErrorCodes.NO_SUCH_BUCKET;
+
 /**
  * @author jenshadlich@googlemail.com
  */
@@ -41,7 +43,8 @@ public class ExistsBucket extends AbstractOperation {
             return createErrorResponse(ErrorCodes.SIGNATURE_DOES_NOT_MATCH, resource, null);
         }
         if (!getStorageBackend().doesBucketExist(bucket)) {
-            return createErrorResponse(ErrorCodes.NO_SUCH_BUCKET, resource, null);
+            return Response.status(NO_SUCH_BUCKET.getStatusCode())
+                    .build();
         }
         if (!getStorageBackend().getBucket(bucket).isOwnedBy(authorizationContext.getUser())) {
             return createErrorResponse(ErrorCodes.ACCESS_DENIED, resource, null);
