@@ -75,7 +75,7 @@ public class InMemoryStorageBackend implements StorageBackend {
         final byte[] md5 = DigestUtils.md5(content);
         final String md5Base64 = Base64.encodeBase64String(md5);
 
-        if (!md5Base64.equals(expectedMD5)) {
+        if (expectedMD5 != null && !md5Base64.equals(expectedMD5)) {
             throw new BadDigestException(String.format("MD5 mismatch: expected '%s' but got '%s'", expectedMD5, md5Base64));
         }
 

@@ -53,7 +53,7 @@ public class CreateObject extends AbstractOperation {
             return createErrorResponse(ErrorCodes.ACCESS_DENIED, resource, null);
         }
 
-        final String expectedMD5 = request.getHeader(Headers.CONTENT_MD5);
+        final String expectedMD5 = request.getHeader(Headers.CONTENT_MD5); // optional
         try {
             S3Object object = getStorageBackend().createObject(
                     bucket,
