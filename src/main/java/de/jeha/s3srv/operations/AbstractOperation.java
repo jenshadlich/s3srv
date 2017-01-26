@@ -58,9 +58,9 @@ public abstract class AbstractOperation {
         final String contentType = request.getHeader(Headers.CONTENT_TYPE);
         final String host = request.getHeader(Headers.HOST);
 
-        LOG.info("Date: {}", date);
-        LOG.info("Authorization: {}", authorization);
-        LOG.info("Host: {}", host);
+        LOG.debug("Date: {}", date);
+        LOG.debug("Authorization: {}", authorization);
+        LOG.debug("Host: {}", host);
 
         if (authorization == null) {
             return new AuthorizationContext(new S3User("anonymous", "", null), true);
