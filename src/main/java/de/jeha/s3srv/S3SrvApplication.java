@@ -5,7 +5,6 @@ import de.jeha.s3srv.config.S3SrvConfiguration;
 import de.jeha.s3srv.health.StorageBackendHealthCheck;
 import de.jeha.s3srv.resources.S3OperationsFacade;
 import de.jeha.s3srv.storage.StorageBackend;
-import de.jeha.s3srv.storage.backends.InMemoryStorageBackend;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -47,9 +46,11 @@ public class S3SrvApplication extends Application<S3SrvConfiguration> {
 
         environment.jersey().register(new S3OperationsFacade(storageBackend));
 
-        // print request / response headers
-        // printEntity=false because printing consumes the input stream and breaks object creation (PUT Bucket)
-        environment.jersey().register(new LoggingFilter(Logger.getLogger("InboundRequestResponse"), false));
+        if (configuration.isJerseyLoggingFilterEnabled()) {
+            // print request / response headers
+            // printEntity=false because printing consumes the input stream and breaks object creation (PUT Bucket)
+            environment.jersey().register(new LoggingFilter(Logger.getLogger("InboundRequestResponse"), false));
+        }
 
         environment.jersey().disable(ServerProperties.WADL_FEATURE_DISABLE);
     }

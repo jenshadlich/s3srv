@@ -1,6 +1,5 @@
 package de.jeha.s3srv.config;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import de.jeha.s3srv.common.security.Credentials;
 import io.dropwizard.Configuration;
@@ -28,6 +27,9 @@ public class S3SrvConfiguration extends Configuration {
     @Valid
     private StorageBackendFactory storageBackend;
 
+    @JsonProperty
+    private boolean jerseyLoggingFilterEnabled = false;
+
     public String getAccessKey() {
         return accessKey;
     }
@@ -42,6 +44,10 @@ public class S3SrvConfiguration extends Configuration {
 
     public StorageBackendFactory getStorageBackend() {
         return storageBackend;
+    }
+
+    public boolean isJerseyLoggingFilterEnabled() {
+        return jerseyLoggingFilterEnabled;
     }
 
 }

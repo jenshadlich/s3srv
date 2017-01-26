@@ -6,8 +6,8 @@ server:
       port: 8888
       maxRequestHeaderSize: 8KiB
       maxResponseHeaderSize: 8KiB
-      acceptorThreads: 4
-      selectorThreads: 4
+      acceptorThreads: 2
+      selectorThreads: 2
   adminConnectors:
     - type: http
       port: 8889
@@ -32,3 +32,5 @@ secretKey: eU8cXNzdXGEFpMMa4SSINjlIeD1fea4pMO3dIw9T
 
 storageBackend:
   type: in-memory
+
+jerseyLoggingFilterEnabled: true
