@@ -15,9 +15,9 @@ server:
     enabled: true
     bufferSize: 32KiB
   requestLog:
-    timeZone: UTC
     appenders:
       - type: console
+        timeZone: UTC
 
 logging:
   level: INFO
@@ -25,6 +25,7 @@ logging:
     "de.jeha.s3srv": DEBUG
   appenders:
     - type: console
+      timeZone: UTC
 
 accessKey: GUSCQ627K6CC4OAL4RGC
 secretKey: eU8cXNzdXGEFpMMa4SSINjlIeD1fea4pMO3dIw9T
