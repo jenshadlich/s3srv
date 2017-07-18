@@ -8,10 +8,8 @@ import de.jeha.s3srv.common.security.Credentials;
 public class GenerateRandomCredentials {
 
     public static void main(String... args) {
-        Credentials credentials = Credentials.generateRandom();
-
-        System.out.println(credentials.getAccessKey());
-        System.out.println(credentials.getSecretKey());
+        final Credentials credentials = Credentials.generateRandom(false);
+        credentials.print();
     }
 
 }

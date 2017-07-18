@@ -10,7 +10,8 @@ public class Credentials {
     private final static String ACCESS_KEY_CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private final static int ACCESS_KEY_LENGTH = 20;
 
-    private final static String SECRET_KEY_CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz/+";
+    private final static String SECRET_KEY_CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    private final static String SECRET_KEY_CHARS_WITH_SPECIAL_CHARS = SECRET_KEY_CHARS + "/+";
     private final static int SECRET_KEY_LENGTH = 40;
 
     private final String accessKey;
@@ -35,8 +36,21 @@ public class Credentials {
      * @return randomly generated credentials
      */
     public static Credentials generateRandom() {
+        return generateRandom(true);
+    }
+
+    /**
+     * Generates a random pair of access key and secret key in a pretty naive way.
+     *
+     * @param includeSpecialChars include special chars ('/' and '+') for secret keys
+     * @return randomly generated credentials
+     */
+    public static Credentials generateRandom(boolean includeSpecialChars) {
         String accessKey = RandomStringUtils.random(ACCESS_KEY_LENGTH, ACCESS_KEY_CHARS);
-        String secretKey = RandomStringUtils.random(SECRET_KEY_LENGTH, SECRET_KEY_CHARS);
+        String secretKey = RandomStringUtils.random(
+                SECRET_KEY_LENGTH,
+                includeSpecialChars ? SECRET_KEY_CHARS_WITH_SPECIAL_CHARS : SECRET_KEY_CHARS
+        );
 
         return new Credentials(accessKey, secretKey);
     }
