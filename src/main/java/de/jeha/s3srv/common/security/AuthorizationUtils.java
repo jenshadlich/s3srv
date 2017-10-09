@@ -28,7 +28,7 @@ public class AuthorizationUtils {
                         resource);
         LOG.debug("String to sign = '{}'", stringToSign);
 
-        String hmac;
+        final String hmac;
         try {
             hmac = SignatureUtils.calculateHmacSha1(stringToSign, credentials.getSecretKey());
             LOG.debug("Calculated HMAC-SHA1 = '{}'", hmac);

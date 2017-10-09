@@ -21,7 +21,7 @@ public class SignatureUtils {
      */
     public static String calculateHmacSha1(String data, String key) throws SignatureException {
         try {
-            Mac mac = HmacUtils.getHmacSha1(key.getBytes());
+            final Mac mac = HmacUtils.getHmacSha1(key.getBytes());
             return Base64.getEncoder().encodeToString(mac.doFinal(data.getBytes()));
 
         } catch (Exception e) {
