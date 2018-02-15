@@ -12,10 +12,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <!-- project dependency versions -->
-        <slf4j.version>1.7.22</slf4j.version>
-        <dropwizard.version>1.0.8</dropwizard.version>
-        <commons-io.version>2.5</commons-io.version>
-        <commons-codec.version>1.10</commons-codec.version>
+        <slf4j.version>1.7.25</slf4j.version>
+        <dropwizard.version>1.0.9</dropwizard.version>
+        <commons-io.version>2.6</commons-io.version>
+        <commons-codec.version>1.11</commons-codec.version>
         <junit.version>4.12</junit.version>
         <mockito-core.version>1.10.19</mockito-core.version>
         <assertj-core.version>3.5.1</assertj-core.version>
