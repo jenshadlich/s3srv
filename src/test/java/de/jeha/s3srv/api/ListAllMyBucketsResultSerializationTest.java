@@ -1,14 +1,14 @@
 package de.jeha.s3srv.api;
 
 import de.jeha.s3srv.xml.JaxbMarshaller;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.time.Instant;
 import java.util.Collections;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @author jenshadlich@googlemail.com

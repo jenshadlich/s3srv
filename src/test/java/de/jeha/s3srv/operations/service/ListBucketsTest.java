@@ -6,7 +6,7 @@ import de.jeha.s3srv.common.security.Credentials;
 import de.jeha.s3srv.model.S3User;
 import de.jeha.s3srv.storage.StorageBackend;
 import de.jeha.s3srv.xml.JaxbMarshaller;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,8 +14,10 @@ import javax.ws.rs.core.Response;
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * @author jenshadlich@googlemail.com

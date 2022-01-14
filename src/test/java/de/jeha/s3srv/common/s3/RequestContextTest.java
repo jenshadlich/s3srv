@@ -1,14 +1,13 @@
 package de.jeha.s3srv.common.s3;
 
 import de.jeha.s3srv.common.http.Headers;
-import de.jeha.s3srv.common.s3.RequestContext;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 /**

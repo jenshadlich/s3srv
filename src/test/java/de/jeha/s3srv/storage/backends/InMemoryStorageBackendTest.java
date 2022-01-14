@@ -5,13 +5,13 @@ import de.jeha.s3srv.common.security.Credentials;
 import de.jeha.s3srv.model.S3Object;
 import de.jeha.s3srv.storage.StorageBackend;
 import org.apache.commons.io.IOUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * @author jenshadlich@googlemail.com

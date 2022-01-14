@@ -1,10 +1,10 @@
 package de.jeha.s3srv.common.security;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.security.SignatureException;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @author jenshadlich@googlemail.com
