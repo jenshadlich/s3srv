@@ -8,9 +8,6 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-/**
- * @author jenshadlich@googlemail.com
- */
 public class S3SrvConfiguration extends Configuration {
 
     @JsonProperty

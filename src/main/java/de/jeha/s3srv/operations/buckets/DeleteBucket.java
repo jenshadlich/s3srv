@@ -10,9 +10,6 @@ import org.slf4j.LoggerFactory;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.Response;
 
-/**
- * @author jenshadlich@googlemail.com
- */
 public class DeleteBucket extends AbstractOperation {
 
     private static final Logger LOG = LoggerFactory.getLogger(DeleteBucket.class);

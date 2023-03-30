@@ -3,9 +3,6 @@ package de.jeha.s3srv.common.s3;
 import javax.validation.ValidationException;
 import java.util.regex.Pattern;
 
-/**
- * @author jenshadlich@googlemail.com
- */
 public class BucketNameValidator {
 
     private static final int MIN_BUCKET_LENGTH = 3;

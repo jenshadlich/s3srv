@@ -2,9 +2,6 @@ package de.jeha.s3srv.common.security;
 
 import de.jeha.s3srv.model.S3User;
 
-/**
- * @author jenshadlich@googlemail.com
- */
 public class AuthorizationContext {
 
     private final S3User user;

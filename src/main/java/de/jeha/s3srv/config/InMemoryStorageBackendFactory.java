@@ -5,9 +5,6 @@ import de.jeha.s3srv.common.security.Credentials;
 import de.jeha.s3srv.storage.StorageBackend;
 import de.jeha.s3srv.storage.backends.InMemoryStorageBackend;
 
-/**
- * @author jenshadlich@googlemail.com
- */
 @JsonTypeName("in-memory")
 public class InMemoryStorageBackendFactory implements StorageBackendFactory {
 

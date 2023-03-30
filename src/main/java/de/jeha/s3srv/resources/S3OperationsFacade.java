@@ -17,9 +17,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
-/**
- * @author jenshadlich@googlemail.com
- */
 @Path("/")
 public class S3OperationsFacade {
 

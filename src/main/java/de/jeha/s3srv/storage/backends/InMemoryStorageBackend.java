@@ -22,9 +22,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/**
- * @author jenshadlich@googlemail.com
- */
 public class InMemoryStorageBackend implements StorageBackend {
 
     private static final Logger LOG = LoggerFactory.getLogger(InMemoryStorageBackend.class);

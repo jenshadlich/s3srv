@@ -9,9 +9,6 @@ import java.time.Instant;
 import java.util.Date;
 import java.util.Locale;
 
-/**
- * @author jenshadlich@googlemail.com
- */
 public class RFC822Date {
 
     private static final DateTimeZone GMT = new FixedDateTimeZone("GMT", "GMT", 0, 0);

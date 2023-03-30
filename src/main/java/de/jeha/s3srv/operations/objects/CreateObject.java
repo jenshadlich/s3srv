@@ -14,9 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 
-/**
- * @author jenshadlich@googlemail.com
- */
 public class CreateObject extends AbstractOperation {
 
     private static final Logger LOG = LoggerFactory.getLogger(CreateObject.class);

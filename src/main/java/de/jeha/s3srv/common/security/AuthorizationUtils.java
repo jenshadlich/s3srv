@@ -8,9 +8,6 @@ import org.slf4j.LoggerFactory;
 import java.security.SignatureException;
 import java.util.Locale;
 
-/**
- * @author jenshadlich@googlemail.com
- */
 public class AuthorizationUtils {
 
     private static final Logger LOG = LoggerFactory.getLogger(AuthorizationUtils.class);

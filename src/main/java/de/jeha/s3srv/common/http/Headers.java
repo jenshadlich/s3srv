@@ -1,8 +1,5 @@
 package de.jeha.s3srv.common.http;
 
-/**
- * @author jenshadlich@googlemail.com
- */
 public class Headers {
 
     public static String AUTHORIZATION = "Authorization";

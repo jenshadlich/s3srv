@@ -2,9 +2,6 @@ package de.jeha.s3srv.model;
 
 import java.time.Instant;
 
-/**
- * @author jenshadlich@googlemail.com
- */
 public class S3Bucket {
 
     private final S3User owner;

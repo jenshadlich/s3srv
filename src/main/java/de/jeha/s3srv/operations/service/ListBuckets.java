@@ -16,9 +16,6 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * @author jenshadlich@googlemail.com
- */
 public class ListBuckets extends AbstractOperation {
 
     private static final Logger LOG = LoggerFactory.getLogger(ListBuckets.class);

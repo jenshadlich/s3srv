@@ -8,9 +8,6 @@ import de.jeha.s3srv.api.ListBucketResult;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 
-/**
- * @author jenshadlich@googlemail.com
- */
 class JaxbContextHolder {
 
     private static JAXBContext JAXB_CONTEXT = null;

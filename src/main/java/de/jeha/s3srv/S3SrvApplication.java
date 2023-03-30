@@ -14,9 +14,6 @@ import org.glassfish.jersey.server.ServerProperties;
 import java.util.Locale;
 import java.util.logging.Logger;
 
-/**
- * @author jenshadlich@googlemail.com
- */
 public class S3SrvApplication extends Application<S3SrvConfiguration> {
 
     private static final String APPLICATION_NAME = "s3srv";

@@ -1,8 +1,5 @@
 package de.jeha.s3srv.common.errors;
 
-/**
- * @author jenshadlich@googlemail.com
- */
 public enum ErrorCodes {
 
     ACCESS_DENIED(

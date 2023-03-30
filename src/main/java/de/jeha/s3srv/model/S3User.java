@@ -2,9 +2,6 @@ package de.jeha.s3srv.model;
 
 import de.jeha.s3srv.common.security.Credentials;
 
-/**
- * @author jenshadlich@googlemail.com
- */
 public class S3User {
 
     private final String id;

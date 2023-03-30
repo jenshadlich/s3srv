@@ -3,9 +3,6 @@ package de.jeha.s3srv.api;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- * @author jenshadlich@googlemail.com
- */
 @XmlRootElement(name = "Error")
 public class ErrorResponse {
 

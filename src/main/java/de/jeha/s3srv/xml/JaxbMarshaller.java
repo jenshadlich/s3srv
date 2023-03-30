@@ -8,9 +8,6 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
 
-/**
- * @author jenshadlich@googlemail.com
- */
 public class JaxbMarshaller {
 
     private static Marshaller MARSHALLER = null;

@@ -1,8 +1,5 @@
 package de.jeha.s3srv.model;
 
-/**
- * @author jenshadlich@googlemail.com
- */
 public class S3Owner {
 
     private final String displayName;

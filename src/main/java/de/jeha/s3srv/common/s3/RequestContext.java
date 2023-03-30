@@ -5,9 +5,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * @author jenshadlich@googlemail.com
- */
 public class RequestContext {
 
     private final boolean pathStyle;

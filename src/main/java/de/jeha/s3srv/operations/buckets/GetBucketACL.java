@@ -17,9 +17,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Collections;
 
-/**
- * @author jenshadlich@googlemail.com
- */
 public class GetBucketACL extends AbstractOperation {
 
     private static final Logger LOG = LoggerFactory.getLogger(GetBucketACL.class);

@@ -5,9 +5,6 @@ import de.jeha.s3srv.storage.InputStreamCallback;
 import java.io.InputStream;
 import java.time.Instant;
 
-/**
- * @author jenshadlich@googlemail.com
- */
 public class S3Object {
 
     private final S3Bucket bucket;

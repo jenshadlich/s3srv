@@ -2,9 +2,6 @@ package de.jeha.s3srv.common.security;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
-/**
- * @author jenshadlich@googlemail.com
- */
 public class Credentials {
 
     private final static String ACCESS_KEY_CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";

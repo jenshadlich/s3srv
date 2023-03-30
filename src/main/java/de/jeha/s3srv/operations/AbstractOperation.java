@@ -17,9 +17,6 @@ import javax.ws.rs.core.Response;
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
 
-/**
- * @author jenshadlich@googlemail.com
- */
 public abstract class AbstractOperation {
 
     private static final Logger LOG = LoggerFactory.getLogger(AbstractOperation.class);

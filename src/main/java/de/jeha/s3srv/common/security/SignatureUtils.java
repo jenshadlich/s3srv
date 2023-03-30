@@ -6,9 +6,6 @@ import javax.crypto.Mac;
 import java.security.SignatureException;
 import java.util.Base64;
 
-/**
- * @author jenshadlich@googlemail.com
- */
 public class SignatureUtils {
 
     /**

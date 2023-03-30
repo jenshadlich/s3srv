@@ -2,9 +2,6 @@ package de.jeha.s3srv.api;
 
 import javax.xml.bind.annotation.XmlElement;
 
-/**
- * @author jenshadlich@googlemail.com
- */
 public class Owner {
 
     @XmlElement(name = "ID")

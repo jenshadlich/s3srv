@@ -3,9 +3,6 @@ package de.jeha.s3srv.health;
 import com.codahale.metrics.health.HealthCheck;
 import de.jeha.s3srv.storage.HealthAware;
 
-/**
- * @author jenshadlich@googlemail.com
- */
 public class StorageBackendHealthCheck extends HealthCheck {
 
     private final HealthAware storageBackend;

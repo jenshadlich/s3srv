@@ -9,9 +9,6 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author jenshadlich@googlemail.com
- */
 @XmlRootElement(name = "ListBucketResult")
 public class ListBucketResult {
 

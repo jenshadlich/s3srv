@@ -12,9 +12,6 @@ import javax.ws.rs.core.Response;
 
 import static de.jeha.s3srv.common.errors.ErrorCodes.NO_SUCH_BUCKET;
 
-/**
- * @author jenshadlich@googlemail.com
- */
 public class ExistsBucket extends AbstractOperation {
 
     private static final Logger LOG = LoggerFactory.getLogger(ExistsBucket.class);
