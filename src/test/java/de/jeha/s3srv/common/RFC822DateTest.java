@@ -6,9 +6,6 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-/**
- * @author jenshadlich@googlemail.com
- */
 public class RFC822DateTest {
 
     @Test

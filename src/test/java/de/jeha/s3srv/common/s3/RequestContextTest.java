@@ -10,9 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
-/**
- * @author jenshadlich@googlemail.com
- */
 public class RequestContextTest {
 
     @Test

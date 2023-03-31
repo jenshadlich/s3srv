@@ -19,9 +19,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-/**
- * @author jenshadlich@googlemail.com
- */
 public class ListBucketsTest {
 
     @Test

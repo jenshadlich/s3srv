@@ -6,9 +6,6 @@ import java.security.SignatureException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-/**
- * @author jenshadlich@googlemail.com
- */
 public class SignatureUtilsTest {
 
     @Test

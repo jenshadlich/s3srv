@@ -13,9 +13,6 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-/**
- * @author jenshadlich@googlemail.com
- */
 public class InMemoryStorageBackendTest {
 
     @Test
