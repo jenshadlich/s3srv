@@ -25,7 +25,6 @@ public class GetBucketAclTest {
         final StorageBackend mockedStorageBackend = Mockito.mock(StorageBackend.class);
         when(mockedStorageBackend.getUserByAccessId("foo")).thenReturn(s3user);
         when(mockedStorageBackend.doesBucketExist("test-bucket")).thenReturn(true);
-        when(mockedStorageBackend.doesBucketExist("test-bucket")).thenReturn(true);
         final S3Bucket mockedBucket = Mockito.mock(S3Bucket.class);
         when(mockedStorageBackend.getBucket("test-bucket")).thenReturn(mockedBucket);
         when(mockedBucket.isOwnedBy(s3user)).thenReturn(true);
