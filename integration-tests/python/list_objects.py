@@ -6,11 +6,11 @@ conn = boto.connect_s3(
     aws_access_key_id=access_key,
     aws_secret_access_key=secret_key,
     host='localhost',
-    port=8080,
+    port=8888,
     is_secure=False,
     calling_format=boto.s3.connection.OrdinaryCallingFormat(),
 )
 
 bucket = conn.get_bucket('test-bucket')
 for key in bucket.list():
-    print "{name}".format(name=key.name)
+    print("{name}".format(name=key.name))
