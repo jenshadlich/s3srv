@@ -18,6 +18,7 @@
         <commons-codec.version>1.15</commons-codec.version>
         <commons-text.version>1.10.0</commons-text.version>
         <jetty.version>9.4.52.v20230823</jetty.version>
+        <snakeyaml.version>1.33</snakeyaml.version>
         <junit.version>5.10.0</junit.version>
         <mockito.version>5.2.0</mockito.version>
         <jaxb.version>2.3.1</jaxb.version>
@@ -58,6 +59,16 @@
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-server</artifactId>
             <version>${jetty.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-servlet</artifactId>
+            <version>${jetty.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>${snakeyaml.version}</version>
         </dependency>
 
         <dependency>
