@@ -1,6 +1,6 @@
 # s3srv
 
-![build](https://api.travis-ci.org/jenshadlich/s3srv.svg)
+![build](https://github.com/jenshadlich/s3srv/actions/workflows/maven.yml/badge.svg)
 
 S3-compatible server written in Java. The compatiblity is currently limited of course as it's still work in progress :grimacing:
 
