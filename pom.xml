@@ -17,6 +17,7 @@
         <commons-io.version>2.11.0</commons-io.version>
         <commons-codec.version>1.15</commons-codec.version>
         <commons-text.version>1.10.0</commons-text.version>
+        <jetty.version>9.4.52.v20230823</jetty.version>
         <junit.version>5.10.0</junit.version>
         <mockito.version>5.2.0</mockito.version>
         <jaxb.version>2.3.1</jaxb.version>
@@ -52,6 +53,11 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-text</artifactId>
             <version>${commons-text.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-server</artifactId>
+            <version>${jetty.version}</version>
         </dependency>
 
         <dependency>
