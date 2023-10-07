@@ -19,6 +19,7 @@
         <commons-text.version>1.10.0</commons-text.version>
         <jetty.version>9.4.52.v20230823</jetty.version>
         <snakeyaml.version>1.33</snakeyaml.version>
+        <jackson.version>2.12.7.1</jackson.version>
         <junit.version>5.10.0</junit.version>
         <mockito.version>5.2.0</mockito.version>
         <jaxb.version>2.3.1</jaxb.version>
@@ -74,6 +75,11 @@
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
             <version>${snakeyaml.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
         </dependency>
 
         <dependency>
